@@ -5,9 +5,9 @@
 -   Không cần sử dụng this
 -   lifecycle là một vòng đời tồn tại từ khi cài đặt tới khi gỡ
 
-# **các loại hooks cơ bản**
+# **Các loại hook cơ bản**
 
--   [useState](),
+-   [useState](#useState),
 -   [useEffect](),
 -   [useLayoutEffect](),
 -   [useRef](),
@@ -17,3 +17,77 @@
 -   [useContext](),
 -   [useImperativeHandel](),
 -   [useDebugValue](),
+
+# **useState**
+
+### Khái niệm cơ bản
+
+-   Là trạng thái của dữ liệu, giúp đơn giản hóa việc thay đổi dữ liệu ra giao diện người dùng
+-   Sử dụng khi muốn thay đổi dữ liệu, giao diện sẽ tự động cập nhật
+
+### Cách dùng
+
+```jsx
+import { useState } from "react";
+
+function Component() {
+    const [state, setState] = useState(initState);
+
+    ...
+}
+```
+
+### Nguyên lý hoạt động
+
+-   `useState` nhận giá trị khởi tạo là `initState`
+-   Sau đó `initState` truyền giá trị qua phần tử `state` trong mảng giá trị
+-   Muốn thay đổi giá trị khởi tạo ban đầu ta đùng giá trị còn lại trong mảng `setState` để thay đổi, dữ liệu sẽ được cập nhật lại
+
+### Thực hành
+
+-   Tạo sự thay đổi khi click button
+
+```jsx
+import { useState } from "react";
+function App() {
+    let initState = 1;
+    const [couter, setCouter] = useState(initState);
+    const handleCounter = () => {
+        setCouter(couter + 1);
+    };
+    return (
+        <div className="App" style={{ padding: 20 }}>
+            <h1>{couter}</h1>
+            <button onClick={handleCounter}>Button Click</button>
+        </div>
+    );
+}
+
+export default App;
+```
+
+### Mội số lưu ý khi áp dụng callback vào state
+
+-   Khi gọi nhiều hàm thay đổi như bên dưới, thì giá trị vẫn sẽ tăng lên một bới vì nói chỉ render lại đúng một lần
+
+```jsx
+const [couter, setCouter] = useState(initState);
+const handleCounter = () => {
+    setCouter(couter + 1);
+    setCouter(couter + 1);
+    setCouter(couter + 1);
+};
+```
+
+-   Để có thể thay đổi từ 1 lên 4 ta phải áp dụng callback như sau, nó sẽ gộp code lại và sử lý render một lần tăng từ 1 -> 4
+
+```jsx
+const [couter, setCouter] = useState(initState);
+const handleCounter = () => {
+    setCouter((prevCouter) => prevCouter + 1);
+    setCouter((prevCouter) => prevCouter + 1);
+    setCouter((prevCouter) => prevCouter + 1);
+};
+```
+
+-   Một điều đáng lưu ý là khi `initState` là một callback ( nhận giá trị là một hàm ), lúc này `initState` sẽ là giá trị khi chúng ta `return` bên trong hàm
