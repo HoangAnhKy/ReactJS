@@ -1,0 +1,12 @@
+{
+  "courses": [
+    {
+      "name": "ReactJS",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "name": "Laravel"
+    }
+  ]
+}

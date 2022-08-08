@@ -1,0 +1,102 @@
+appendChild('ten'): để thêm lớp con
+
+id: Định danh – là duy nhất cho mỗi phần tử nên thường được dùng để truy xuất DOM trực tiếp và nhanh chóng.
+
+className: Tên lớp – Cũng dùng để truy xuất trực tiếp như id, nhưng 1 className có thể dùng cho nhiều phần tử.
+
+tagName: Tên thẻ HTML.
+
+innerHTML: Trả về mã HTML bên trong phần tử hiện tại
+innerText: thêm giá trị cho thẻ hiện tại
+
+attributes: Tập các thuộc tính như id, name, class, href, title…
+
+value: Lấy giá trị của thành phần được chọn thành một biến.
+
+----------------------------
+
+p.appendChild(node); add phần tử node vào p
+
+tạo mới p var p = document.createElement("p");
+
+tại mới 1 clas 
+	div_sp.classList.add("sp");
+
+thêm src cho file vừa tạo
+	img.src = 'nội dung link'
+
+
+ví dụ 
+
+ function add_child() {
+            var div = document.getElementById("Set-row");
+
+            /* tạo thẻ div với class là sp */
+            var div_sp = document.createElement("div");
+            div_sp.classList.add("sp");
+
+            /* add div sp vô div set row */
+            div.appendChild(div_sp);
+
+            /* tạo thẻ div với class là image */
+            var div_img = document.createElement("div");
+            div_img.classList.add("image");
+
+            /* tạo 1 div ảnh và thêm 1 ảnh */
+            var img = document.createElement("img");
+            img.src = '../IMG/Nike-Air-Force-1-Mid-Jewel-NYC.png';
+
+            /* add thẻ ảnh vô div ảnh */
+            div_img.appendChild(img);
+
+            /* add div ảnh vô div sp */
+            div_sp.appendChild(div_img);
+
+            /* tạo thẻ div với class là txt */
+            var div_txt = document.createElement("div");
+            div_txt.classList.add("txt");
+
+            /* add div txt vô div sp */
+            div_sp.appendChild(div_txt);
+
+            /* tạo thẻ div với class là sp */
+            var div_line_p = document.createElement("div");
+            div_line_p.classList.add("line-p");
+
+            /* add div div_line_p vô div txt*/
+            div_txt.appendChild(div_line_p);
+
+            /* tạo thẻ p với nội dung */
+            var tag_p = document.createElement("p");
+
+            var node = document.createElement("b");
+            node = document.createTextNode("Giày Nike Air Force 1 Mid Jewel ‘NYC’ DH5622-001");
+            tag_p.appendChild(node);
+
+            /* tạo thẻ p2 và với clas là tag_b và có nội dung trong node*/
+            var tag_p2 = document.createElement("p");
+            tag_p2.classList.add("tag_b");
+
+            var node2 = document.createElement("b");
+            node2 = document.createTextNode("4.800.000đ");
+            tag_p2.appendChild(node2);
+
+            /* add những thẻ p vô div_line_p*/
+            div_line_p.appendChild(tag_p);
+            div_line_p.appendChild(tag_p2);
+
+            /* tạo thẻ div với class là icon */
+            var div_icon = document.createElement("div");
+            div_icon.classList.add("icon");
+
+            /* add div div_line_p vô div txt*/
+            div_txt.appendChild(div_icon);
+
+            /* tạo thẻ i với class kép là  fa fa-heart-o*/
+            var tag_i = document.createElement("i");
+            tag_i.classList.add("fa");
+            tag_i.classList.add("fa-heart-o");
+
+            /* add tag_i vô div div_icon*/
+            div_icon.appendChild(tag_i);
+        }

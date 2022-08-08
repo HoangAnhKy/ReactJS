@@ -1,0 +1,120 @@
+Ví dụ thưc tế ở file test_cdn_react
+
+* Tạo các thẻ tag và thêm dữ liệu
+    - Sử dụng thẻ createElement để tạo:
+        + với đối số thứ nhất là tên thẻ tag
+        + với đối số thử hai là các attributes
+        + với đối số thứ ba là các children ( các giá trị ở giữa thẻ <a>here</a> ), và nó là đa hình (có thể là tất cả các kiểu dữ liệu)
+    - câu lệnh: React.createElement('Thẻ tag', {'attributes'}, 'Nội dung',n)
+                 React.createElement(title, props, children, n)
+
+    vd:
+        React.createElement('h1', {
+            'class' : 'heading',
+            'title' : 'h1',
+            },
+            'hello guys'
+            )
+
+* Đổ dữ liệu vào view
+
+    - Tạo một thẻ div trên html sau đó đặt id và sau đó lấy Element của nó 
+        <div id="root"></div>
+        const container = document.getElementById("root"); //B1
+
+    - Sử dụng ReactDOM.createRoot() để khởi tạo kết nối giữa dom-react, sau đó render dữ liệu react vào
+        const root = ReactDOM.createRoot( container ); //B2
+        root.render('dữ liệu react'); //B3
+
+    - muốn đổ 2 element vào chung một render thì ta sử dụng thêm react.Fragment
+         React.createElement(
+            react.Fragment, 
+            null,
+             React.createElement('h1', null,'hello guys'),
+             React.createElement('h2', null,'hello guys 2'),
+            )
+
+* Sử dụng function để tạo view, để có thể tái sử dụng lại
+    // sử dụng theo cấu trúc kiểu JSX, không kèm theo dữ liệu
+    function Header(){
+        return(<div className="Header>New Header</div>);
+    } 
+    //kèm theo dữ liệu
+    function Header2(props){
+        return(<div className="Header>{props.name}</div>);
+    }
+    // render dữ liệu vào view
+        const app = (
+            <div>
+                <Header /> //Gọi lại function là được, không kèm theo dữ liệu
+                <Header name="header" /> //Gọi lại function kèm theo dữ liệu
+            </div>
+        )
+
+        <div id="root"></div>
+        const root = ReactDOM.createRoot( container );
+        root.render(app); 
+
+* Sử dụng Class để tạo view, để có thể tái sử dụng lại.
+    // Lưu ý: phải kế thừa từ React.Compoment
+    vd: Sử dụng class để render theo cấu trúc JSX
+
+    class Header extends React.Component {
+        render() {
+            return (<div className="Header">New Header</div>);
+        }
+    }
+
+    class Header extends React.Component {
+        render() {
+            return (<div className="Header">{this.props.title}</div>);
+        }
+    }
+
+    // render dữ liệu vào view
+        const app = (
+            <div>
+                <Header /> //Gọi lại function là được
+                <Header title="hello"/> 
+            </div>
+        )
+
+        <div id="root"></div>
+        const root = ReactDOM.createRoot( container );
+        root.render(app); 
+
+* Sử dụng truyền thẳng obj qua cho gọn code (dis tắc tu ring)
+    // tạo components
+        function View_course({ course }) {
+                return (
+                    <div className="course_item">
+                        <img src={course.image_url} />
+                        <h2>{course.title}</h2>
+                        <p>{course.students_count}</p>
+                    </div>
+                );
+            }
+    // truyền theo theo dữ liệu
+        const app = (
+            <div className="course_list">
+                    {course.map((obj) => {
+                    return <View_course key={obj.id} course={obj} />;
+                })}
+            </div>
+        );
+
+* Nhận giá trị thông ở giữa function/Class mà chúng ta tạo đó chính là children
+
+    // bài thực hành là create_btn__vippro.html
+
+    // vd: truyền dữ liệu qua children với children là đối số ở giữa thẻ function/Class mà chúng ta tạo
+        function Button({ children }) {
+            return (
+               <button>{children}</button>>
+            );
+        }
+    // truyền theo theo dữ liệu
+        const app = (
+            <Button> Hello </Button>
+        );
+

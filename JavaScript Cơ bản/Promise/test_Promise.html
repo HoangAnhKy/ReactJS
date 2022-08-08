@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Fetch</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+        />
+    </head>
+    <body class="container-fluid">
+        <form id="form_course">
+            <input
+                class="form-control mt-2"  
+                type="text"
+                name="name"
+                placeholder="Tên Lớp"
+            />
+            <button
+                class="form-control btn btn-secondary mt-2 mb-2"
+                type="submit"
+            >
+                Xác nhận
+            </button>
+        </form>
+
+        <div id="container">
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>Tên lớp</td>
+                        <td>Cập nhật</td>
+                        <td>Xóa</td>
+                    </tr>
+                </thead>
+                <tbody id="render_html"></tbody>
+            </table>
+        </div>
+        <script src="js.js"></script>
+    </body>
+</html>

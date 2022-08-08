@@ -1,0 +1,41 @@
+Bài thực hành test_JSX
+
+JSX chính là JavaScript XML, chính xác hơn là có thẻ mở và thẻ đóng
+
+* Để sử dụng JSX vào react thì chúng ta phải sử dụng thêm thư viện babel để chuyển đổi JSX thành Element
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    vd: const element = <h1>Hello, world!</h1>; => React.createElement("h1", null, "Hello, world!");
+
+* Lưu ý: phải có type như thế này <script type="text/babel"></script> thì bable mới được thực thi, nếu không có nó sẽ tưởng là <script type="text/javascript"></script>
+
+* Muốn chèn js vào jsx thì ta chỉ cần mở đóng ngoặc nhọn "{}"
+
+* Muốn dùng object vào jsx thì ta phải dùng "{{}}"
+
+* Muốn lọc dữ liệu cần thiết trong function/class mà ta tạo bằng JSX thì ta dùng cách sau:
+    + Tạo dữ liệu
+    + Sau đó gọi lại function/class đó và hướng đến đối tượng mà ta dùng
+
+    vd: 
+    //khởi tạo components
+    const From = () => {
+        Input() {
+           return <input />
+        },
+        Checkbox() {
+           return <input type="checkbox" />
+        },
+    }
+
+    //Sử dụng components
+        + C1 không linh động mấy
+
+            <From.Input />
+
+        + C2 linh động hơn
+
+            const type = "Input"                    // Tạo giá trị muốn lấy
+            const components = Form[type]           // truyền giá trị muốn lấy
+            <components />                          // Gọi lại components chứa giá trị muốn lấy
+        
+        ...props // toán tử spread, truyền tất cả các giá trị có vào nơi nó được gọi

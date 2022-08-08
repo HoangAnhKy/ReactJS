@@ -1,0 +1,3 @@
+- npm init                                                                              // để cài package
+- Json Server npm> npm i json-server                                                    // để tạo server json
+- về file package.json thêm "start": "json-server --watch db.json"                      //để chạy file db.json

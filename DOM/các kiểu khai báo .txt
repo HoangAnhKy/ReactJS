@@ -1,0 +1,4 @@
+export default [tên để đẩy nó ra ngoài];
+import [tên] from [đường dẫn] để lấy nó lại mà dùng {sử dụng hệ phân tán cũng được}
+
+export {default} form [đường dẫn] tương tự như export default thông thường
