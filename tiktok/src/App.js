@@ -1,16 +1,11 @@
 import { useState } from "react";
+import Context from "./Context_useEffect.js";
 function App() {
-    let initState = 1;
-    const [couter, setCouter] = useState(initState);
-    const handleCounter = () => {
-        setCouter((prevCouter) => prevCouter + 1);
-        setCouter((prevCouter) => prevCouter + 1);
-        setCouter((prevCouter) => prevCouter + 1);
-    };
+    const [toggle, setToggle] = useState(false);
     return (
-        <div className="App" style={{ padding: 20 }}>
-            <h1>{couter}</h1>
-            <button onClick={handleCounter}>Button Click</button>
+        <div style={{ padding: 20 }}>
+            <button onClick={() => setToggle(!toggle)}>Toggle</button>
+            {toggle && <Context />}
         </div>
     );
 }

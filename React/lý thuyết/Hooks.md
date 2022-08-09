@@ -8,7 +8,7 @@
 # **Các loại hook cơ bản**
 
 -   [useState](#useState),
--   [useEffect](),
+-   [useEffect](#useEffect),
 -   [useLayoutEffect](),
 -   [useRef](),
 -   [useCallback](),
@@ -17,6 +17,8 @@
 -   [useContext](),
 -   [useImperativeHandel](),
 -   [useDebugValue](),
+
+---
 
 # **useState**
 
@@ -41,7 +43,7 @@ function Component() {
 
 -   `useState` nhận giá trị khởi tạo là `initState`
 -   Sau đó `initState` truyền giá trị qua phần tử `state` trong mảng giá trị
--   Muốn thay đổi giá trị khởi tạo ban đầu ta đùng giá trị còn lại trong mảng `setState` để thay đổi, dữ liệu sẽ được cập nhật lại
+-   Muốn thay đổi giá trị khởi tạo ban đầu ta đùng giá trị còn lại trong mảng `setState` để thay đổi, dữ liệu sẽ được cập nhật lại.
 
 ### Thực hành
 
@@ -91,3 +93,92 @@ const handleCounter = () => {
 ```
 
 -   Một điều đáng lưu ý là khi `initState` là một callback ( nhận giá trị là một hàm ), lúc này `initState` sẽ là giá trị khi chúng ta `return` bên trong hàm
+
+---
+
+# **useEffect**
+
+### Khái niệm cơ bản
+
+-   Dùng để thay đổi dữ liệu, thay đổi DOM Events
+
+### Cách dùng
+
+```jsx
+import { useEffect } from "react";
+function Component() {
+    // useEffect(callback, [mảng giá trị phụ thuộc, không bắt buộc])
+    // có 3 trường hợp
+    // + useEffect(callback)
+    // + useEffect(callback,[rỗng])
+    // + useEffect(callback,[dependencies ( có giá trị phụ thuộc ) ])
+
+    ...
+}
+```
+
+### Nguyên lý hoạt động cho từng trường hợp của useEffect
+
+-   Có 3 trường hợp
+    -   useEffect( callback )
+        -   gọi Callback mỗi khi compoment re-render
+        -   gọi Callback cùng lúc với compoment nhưng thực thi sau khi compoment được thêm vào DOM
+    -   useEffect( callback, [] )
+        -   Chỉ gọi một lần khi compoment mounted ( compoment được gắn lên document )
+    -   useEffect( callback, [ dependencies ] )
+        -   Sẽ được gọi lãi mỗi khi dependencies thay đổi
+-   Chú ý
+    -   mounted ( gắn ) / unmounted ( gỡ)
+    -   Callback luôn được gọi sau khi compoment mounted
+
+### Thực hành
+
+```jsx
+import { useEffect, useState } from "react";
+const getUrl = ["posts", "uses", "albums"];
+function Context() {
+    const [title, setTitle] = useState("");
+    const [url, setUrl] = useState("posts");
+    // cách 1 callback
+    useEffect(() => {
+        document.title = title;
+    });
+    // cách 2 callback kèm mảng rỗng
+    useEffect(() => {
+        console.log("Context");
+    }, []);
+    // cách 3 callback kèm mảng có giá trị phụ thuộc
+    useEffect(() => {
+        console.log(`https://jsonplaceholder.typicode.com/${url}`);
+    }, [url]);
+
+    return (
+        <div>
+            <div>
+                Thay đổi tilte:
+                <input
+                    type="text"
+                    onChange={(e) => {
+                        setTitle(e.target.value);
+                    }}
+                />
+            </div>
+            <div>
+                {getUrl.map((item) => (
+                    <button
+                        key={item}
+                        style={
+                            item === url
+                                ? { background: "black", color: "white" }
+                                : {}
+                        }
+                        onClick={() => setUrl(item)}>
+                        {item}
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
+}
+export default Context;
+```
