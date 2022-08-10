@@ -113,6 +113,16 @@ function Component() {
     // + useEffect(callback,[rỗng])
     // + useEffect(callback,[dependencies ( có giá trị phụ thuộc ) ])
 
+    //Clean up function
+    //  useEffect(() => {
+
+    //     window.addEventListener("scroll", handleScroll);
+
+    //     // clear function
+    //     return () => {
+    //         window.removeEventListener("scroll", handleScroll);
+    //     };
+    // }, []);
     ...
 }
 ```
@@ -130,6 +140,7 @@ function Component() {
 -   Chú ý
     -   mounted ( gắn ) / unmounted ( gỡ)
     -   Callback luôn được gọi sau khi compoment mounted
+    -   Cleanup function luôn được gọi trước khi compoment unmounted, tránh tình trạng memory leak
 
 ### Thực hành
 
