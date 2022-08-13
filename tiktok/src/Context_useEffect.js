@@ -8,6 +8,7 @@ function Context_useEffect() {
             console.log(detail);
         };
         window.addEventListener(`lesson-${course}`, handleCourse);
+        //Clearup function
         return () => {
             window.removeEventListener(`lesson-${course}`, handleCourse);
         };

@@ -2,26 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import Todo_List_useState from "./Todo_List_useState";
+import useEffect from "./Test_useEffect";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-
-function emitComment(course) {
-    setInterval(() => {
-        window.dispatchEvent(
-            new CustomEvent(`lesson-${course}`, {
-                detail: `Nội dung comment của ${course}`,
-            })
-        );
-    }, 2000);
-}
-emitComment("PHP");
-emitComment("JavaScript");
-emitComment("ReactJS");
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
         {/* <Todo_List_useState /> */}
+        {/* <useEffect /> */}
         <App />
     </React.StrictMode>
 );
