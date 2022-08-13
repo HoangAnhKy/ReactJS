@@ -138,9 +138,10 @@ function Component() {
     -   useEffect( callback, [ dependencies ] )
         -   Sẽ được gọi lãi mỗi khi dependencies thay đổi
 -   Chú ý
-    -   mounted ( gắn ) / unmounted ( gỡ)
+    -   mounted ( gắn ) / unmounted ( gỡ )
     -   Callback luôn được gọi sau khi compoment mounted
     -   Cleanup function luôn được gọi trước khi compoment unmounted, tránh tình trạng memory leak
+    -   Cleanup function luôn được gọi trước khi callback được gọi ( trừ lần mounted )
 
 ### Thực hành
 

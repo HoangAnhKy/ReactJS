@@ -5,6 +5,19 @@ import Todo_List_useState from "./Todo_List_useState";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+function emitComment(course) {
+    setInterval(() => {
+        window.dispatchEvent(
+            new CustomEvent(`lesson-${course}`, {
+                detail: `Nội dung comment của ${course}`,
+            })
+        );
+    }, 2000);
+}
+emitComment("PHP");
+emitComment("JavaScript");
+emitComment("ReactJS");
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
