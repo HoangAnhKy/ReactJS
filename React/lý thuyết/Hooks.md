@@ -360,8 +360,17 @@ export default App;
 
 ### Khái niệm cơ bản
 
+-   Sử dụng `useMeno` để tránh thực hiện lại một logic không cần thiết
+-   Cách dùng y hệt `useEffect`
+
 ### Cách dùng
 
-```
+```js
+import { useMeno } from "react";
+function App() {
+    const variables = useMeno(callback, []); //c1
+    const variables = useMeno(callback, [dependencies]); //c2
+}
 
+export default App;
 ```

@@ -1,14 +1,52 @@
-import { useState, useCallback } from "react";
-import UseCallBack from "./useCallBack";
+import { useState, useMemo, useRef } from "react";
 function App() {
-    const [counter, setCounter] = useState(0);
-    const handleIncrease = useCallback(() => {
-        setCounter((prev) => prev + 1);
-    }, []);
+    const [name, setName] = useState("");
+    const [price, setPrice] = useState("");
+    const [products, setProducts] = useState([]);
+    const nameRef = useRef();
+    const HandleAdd = () => {
+        setProducts((prev) => {
+            return [
+                ...prev,
+                {
+                    name,
+                    price: +price,
+                },
+            ];
+        });
+        setPrice("");
+        setName("");
+        nameRef.current.focus();
+    };
+    const total = useMemo(() => {
+        return products.reduce((total, product) => total + product.price, 0);
+    }, [products]);
     return (
         <div style={{ padding: 20 }}>
-            <UseCallBack onIncrease={handleIncrease} />
-            <h1>{counter}</h1>
+            <input
+                ref={nameRef}
+                value={name}
+                placeholder="name"
+                type="text"
+                onChange={(e) => setName(e.target.value)}
+            />
+            <input
+                value={price}
+                placeholder="price"
+                type="text"
+                onChange={(e) => setPrice(e.target.value)}
+            />
+            <button onClick={HandleAdd}>add</button>
+            <div>
+                <h3>Total: {total}</h3>
+                <ul>
+                    {products.map((obj, i) => (
+                        <li key={i}>
+                            {obj.name} - {obj.price}
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 }
