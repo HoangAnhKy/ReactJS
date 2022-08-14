@@ -1,18 +1,5 @@
-// bug vì khi tạo mới obj mới nhưng giá trị cũ thay đổi theo
-function bug_createObj(obj) {
-    obj.name = "ducati";
-    return obj;
-}
-// fixbug
-function fixbug_createObj(obj) {
-    obj = { ...obj }; // khởi tạo lại
-    obj.name = "ducati2";
-    return obj;
-}
-const car = {
-    name: "BMW",
-};
+const a = [-2, -5, 6, -2, 4, -2, -3];
 
-console.log(bug_createObj(car)); //{ name: 'ducati' }
-console.log(fixbug_createObj(car)); //{ name: 'ducati2' }
-console.log(car); // { name: 'ducati' }
+const odd = a.filter((obj) => obj % 2 !== 0);
+
+console.log(list(a) - list(odd));

@@ -256,7 +256,7 @@ import { memo } from "react";
 function Test() {
     return <h1>Hello ae</h1>;
 }
-export default memo(test);
+export default memo(Test);
 ```
 
 # **Primitive Types & Reference Types**
@@ -334,8 +334,25 @@ export default memo(test);
 -   Cần học kỹ
     -   [Memo](#Memo)
     -   [Primitive Types & Reference Types](#primitive_types_&_reference_types)
+-   `useCallback` giúp chúng ta tránh được trường hợp tạo hàm mới không cần thiết
+-   Cách dùng `useCallback` y như cách dùng `useEffect`
 
 ### Cách dùng
+
+```js
+import { useState, useCallback } from "react";
+function App() {
+    const cb = useCallback(callback, []); //c1
+    const cb = useCallback(callback, [dependencies]); //c2
+}
+
+export default App;
+```
+
+### Nguyên lý hoạt động
+
+-   Khi lần đầu được gắn vào compoment `useCallback` sẽ tạo ra `vùng nhớ giá trị` và gán nó vào hằng mà ta tạo, nếu dependencies thay đổi nó mới render lại.
+-   Và khi sử dụng `useCallback` chúng ta sẽ phải sử dụng thêm `Memo`, vì nếu không sử dụng `Memo` thì `useCallback` cũng không thể hoạt động được
 
 ---
 

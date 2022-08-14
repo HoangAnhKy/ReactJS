@@ -9,7 +9,7 @@
         lúc này nó sẽ callback về function được gọi ở Props và truyền dữ liệu về.
         vd:
 
-    ```sh
+    ```JSX
         // function tạo view
         function View_course({ course, onClick }) {
                 return (

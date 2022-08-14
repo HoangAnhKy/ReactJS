@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Context_useEffect from "./Context_useEffect.js";
+import Context_useEffect from "./useEffect2.js";
 
 function emitComment(course) {
     setInterval(() => {
@@ -15,7 +15,7 @@ emitComment("PHP");
 emitComment("JavaScript");
 emitComment("ReactJS");
 
-function Test_useEffect() {
+function useEffect() {
     const [toggle, setToggle] = useState(false);
 
     return (
@@ -26,4 +26,4 @@ function Test_useEffect() {
     );
 }
 
-export default Test_useEffect;
+export default useEffect;

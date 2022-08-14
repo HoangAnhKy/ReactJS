@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 const list_course = ["PHP", "JavaScript", "ReactJS"];
-function Context_useEffect() {
+function useEffect2() {
     const [course, setCourse] = useState("PHP");
 
     useEffect(() => {
@@ -28,4 +28,4 @@ function Context_useEffect() {
         </div>
     );
 }
-export default Context_useEffect;
+export default useEffect2;
