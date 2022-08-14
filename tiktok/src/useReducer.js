@@ -17,7 +17,7 @@ const reducer = (initState, action) => {
             throw new Error(`Invalid action ${action}`);
     }
 };
-function App() {
+function UseReducer() {
     // khởi tạo dispatch như useState
     const [counter, dispatch] = useReducer(reducer, initState);
     return (
@@ -30,4 +30,4 @@ function App() {
     );
 }
 
-export default App;
+export default UseReducer;

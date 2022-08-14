@@ -13,10 +13,10 @@
 -   [useRef](#useRef),
 -   [useCallback](#useCallback),
 -   [useMeno](#useMeno),
--   [useReducer](),
--   [useContext](),
--   [useImperativeHandel](),
--   [useDebugValue](),
+-   [useReducer](#useReducer),
+-   [useContext](#useContext),
+-   [useImperativeHandel](#useImperativeHandel),
+-   [useDebugValue](#useDebugValue),
 
 ---
 
@@ -370,6 +370,66 @@ import { useMeno } from "react";
 function App() {
     const variables = useMeno(callback, []); //c1
     const variables = useMeno(callback, [dependencies]); //c2
+}
+
+export default App;
+```
+
+# **useReducer**
+
+### Khái niệm cơ bản
+
+-   `useReducer` cung cấp thêm một sự chọn lựa để sử dụng State cho function compoment.
+-   Khi sử dụng `useState` để giải quyết bài toán nào thì ta cũng có thẻ sử dụng `useReducer` để giải quyết nó và ngược lại.
+-   Khi nào sử dụng `useReducer`: đó là khi cái state trở nên phức tạo hơn như là mảng lồng mảng, obj lồng obj nên sử dụng `useReducer` để dễ hiểu hơn
+
+### Nguyên lý hoạt động
+
+-   Gồm 4 bước:
+    -   Init State: giá trị khởi tạo
+    -   Actions: hành động
+    -   Reducer: khởi tạo reducer, là một hàm nhận đầu vào là (giá trị khởi tạo, hành động)
+    -   Dispatch: kích hoạt hành động
+-   Sau khi tạo tới bước 3 (tạo function)
+    -   tạo hooks để nhận giá trị
+        `const [counter, dispatch] = useReducer(reducer, initState);`
+    -   kích hoạt dispatch bằng cách truyền giá trị action vào dispatch
+        `<button onClick={() => dispatch(UP_ACTION)}>up</button>`
+
+### Cách dùng
+
+```js
+import { useReducer } from "react";
+
+// Khởi tạo initState
+const initState = 0;
+// Khởi tạo action
+const UP_ACTION = "up";
+const DOWN_ACTION = "down";
+const ERROR_ACTION = "error";
+// Khởi tạo function
+const reducer = (initState, action) => {
+    switch (action) {
+        case UP_ACTION:
+            return initState + 1;
+        case DOWN_ACTION:
+            return initState - 1;
+        default:
+            throw new Error(`Invalid action ${action}`);
+    }
+};
+function App() {
+    /* khởi tạo dispatch như useState nhưng useReducer nhận hai 
+     giá trị là useReducer(function, initState) */
+    const [counter, dispatch] = useReducer(reducer, initState);
+    return (
+        <div style={{ padding: 20 }}>
+            <h1>{counter}</h1>
+            <button onClick={() => dispatch(UP_ACTION)}>up</button>
+            <button onClick={() => dispatch(DOWN_ACTION)}>down</button>
+            <button onClick={() => dispatch(ERROR_ACTION)}>Error</button>
+        </div>
+    );
 }
 
 export default App;
