@@ -1,18 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import Todo_List_useState from "./Todo_List_useState";
-import UseEffect from "./useEffect";
-import UseCallback from "./useCallback2";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
-        {/* <Todo_List_useState /> */}
-        {/* <UseEffect /> */}
-        {/* <UseCallback /> */}
         <App />
     </React.StrictMode>
 );

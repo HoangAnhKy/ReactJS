@@ -1,5 +1,6 @@
-const a = [-2, -5, 6, -2, 4, -2, -3];
+const a = [1, 2, 3, 2, 1, 4, 1, 4];
+const item = (type, a) => {
+    return a.indexOf(Math[type](...a));
+};
 
-const odd = a.filter((obj) => obj % 2 !== 0);
-
-console.log(list(a) - list(odd));
+console.log([item("min", a)]);

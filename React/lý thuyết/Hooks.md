@@ -434,3 +434,65 @@ function App() {
 
 export default App;
 ```
+
+# **useContext**
+
+-   `Context` và `useContext`: giúp chúng ta truyền dữ liệu tới một compoment con bất kì mà không cần truyền qua Props.
+
+### Nguyên lý hoạt động
+
+-   Có 3 bước:
+    -   Khởi tạo Context
+    -   Sử dụng Provider (`Context`)
+    -   Nhận giá trị Consumer (`useContext`)
+
+### Cách dùng
+
+-   Tạo file `Index.js`
+
+```jsx
+import { useState, createContext } from "react";
+//tạo thêm file context làm trung gian giữa index và pararap
+import Context from "./Context";
+import "./Css.css";
+//export themeContext để pararap nhận được dữ liệu
+export const themeContext = createContext();
+function Index() {
+    const [theme, setTheme] = useState("light");
+    const HandleTheme = () => {
+        setTheme(theme === "light" ? "dark" : "light");
+    };
+    return (
+        <themeContext.Provider value={theme}>
+            <div className="padding">
+                <button onClick={HandleTheme}>Toggle theme</button>
+                <div>
+                    <Context />
+                </div>
+            </div>
+        </themeContext.Provider>
+    );
+}
+
+export default Index;
+```
+
+-   Tạo file `Pararap.js`
+
+```jsx
+import { useContext } from "react";
+import { themeContext } from "./Index";
+function Pararap() {
+    //  nhận giữ liệu
+    const theme = useContext(themeContext);
+    console.log(theme);
+    return (
+        <p className={theme}>
+            Bấm vào button sẽ đổi màu backgourp qua 3 component mà không cần
+            props
+        </p>
+    );
+}
+
+export default Pararap;
+```
