@@ -1,9 +1,8 @@
 import { useReducer, useRef } from "react";
 import "./useContext/Css.css";
 import { ADD_ACTION, SET_JOB, SET_PRICE } from "./useReducer/action";
-import reducer, { initState, set_input, Delete } from "./useReducer/reducer.js";
-
-function App() {
+import reducer, { initState, set_input, Delete } from "./reducer.js";
+function Todo() {
     const [state, dispatch] = useReducer(reducer, initState);
     const { job, price, jobs } = state;
     const nameRef = useRef();
@@ -51,4 +50,4 @@ function App() {
     );
 }
 
-export default App;
+export default Todo;
