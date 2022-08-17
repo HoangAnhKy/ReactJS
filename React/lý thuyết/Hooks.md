@@ -15,7 +15,7 @@
 -   [useMeno](#useMeno),
 -   [useReducer](#useReducer),
 -   [useContext](#useContext),
--   [useImperativeHandel](#useImperativeHandel),
+-   [useImperativeHandle](#useImperativeHandle),
 -   [useDebugValue](#useDebugValue),
 
 ---
@@ -496,3 +496,89 @@ function Pararap() {
 
 export default Pararap;
 ```
+
+# **useImperativeHandle**
+
+### Khái niệm cơ bản
+
+-   `useImperativeHandle` giúp chúng ta tùy chỉnh ref của một component,
+-   `useImperativeHandle` kết hợp với `useRef` thông qua `H-O-C forwarRef` để truyền dữ liệu thông qua Props. Giúp ẩn đi các rủ ro không đáng có của dữ liệu
+
+    -   Khi truyền dữ liệu qua props `<Video ref={ref} />`
+    -   file nhận dữ liệu thông qua `forwarRef`
+
+        ```js
+        import { forwardRef } from "react";
+        import video1 from "./video/download.mp4";
+
+        function Video({Props, ref) {
+            return <video ref={ref} src={video1} width={280} height={500} />;
+        }
+        export default forwardRef(Video); // Nhận dữ liệu
+        ```
+
+### Cách dùng `useImperativeHandle`
+
+```javaScript
+import { forwardRef, useImperativeHandle } from "react";
+
+function Video(Props, ref) {
+    // useImperativeHandle(ref, Callback);
+    // Với ref là giá trị nhận từ file bên ngoài thông qua forwardRef
+    // Callback chứa obj các hàm chuẩn bị xử lý dữ liệu khi được gọi thông qua ref
+
+}
+export default forwardRef(Video);
+
+```
+
+-   VD:
+
+    -   file video
+
+    ```js
+    import { forwardRef, useRef, useImperativeHandle } from "react";
+    import video1 from "./video/download.mp4";
+
+    function Video(Props, ref) {
+        const videoRef = useRef();
+        useImperativeHandle(ref, () => ({
+            play() {
+                videoRef.current.play();
+            },
+            pause() {
+                videoRef.current.play();
+            },
+        }));
+        return <video ref={videoRef} src={video1} width={280} height={500} />;
+    }
+    export default forwardRef(Video);
+    ```
+
+    -   file app gốc
+
+    ```js
+    import { useRef } from "react";
+    import Video from "./Video";
+    function App() {
+        const ref = useRef(); // Dữ liệu ref sẽ được truyền qua forwardRef
+
+        const HandlePlay = () => {
+            ref.current.play(); // gọi hàm trong callback của useImperativeHandle
+        };
+        const HandlePause = () => {
+            ref.current.pause(); // gọi hàm trong callback của useImperativeHandle
+        };
+        return (
+            <div style={{ textAlign: "center" }}>
+                <div>
+                    <button onClick={HandlePlay}>play</button>
+                    <button onClick={HandlePause}>Pause</button>
+                </div>
+                <Video ref={ref} />
+            </div>
+        );
+    }
+
+    export default App;
+    ```
