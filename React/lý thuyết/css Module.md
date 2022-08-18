@@ -1,6 +1,7 @@
 # **Dùng CSS Trong Reactjs**
 
--   [CSS Module](#CSS_Module)
+-   [CSS Module](#css-module)
+-   [clsx đặt tên class](#clsx)
 
 # **CSS Module**
 
@@ -17,7 +18,7 @@
     VD: sử dụng file `Nav.module.css` vào compoment `Nav`
 
     ```js
-    import { styles } from "./Nav.module.css";
+    import styles from "./Nav.module.css";
 
     function Nav() {
         return <h1 style={styles.color}>Css</h1>;
@@ -33,7 +34,7 @@
     ```js
     import "GlobalCSS.css";
     function GlobalStyle({ children }) {
-        return { children };
+        return <>{children}</>;
     }
     export default GlobalStyle;
     ```
@@ -51,3 +52,40 @@
     }
     export default GlobalCss;
     ```
+
+# **clsx**
+
+-   Dùng để đặt tên class tránh trường hợp xử lý chuỗi phức tạp như này `className={`${styles.header} global_h1`}`, có thể gây ra lỗi không cần thiết.
+
+### Cách dùng
+
+-   Cài đặt thư viện `clsx` vào dự án bằng lệnh
+
+    -   Đối với `npm`
+
+    ```sh
+        npm i clsx
+    ```
+
+    -   Đối với `yarn`
+
+    ```sh
+        yarn add clsx
+    ```
+
+-   Sau đó `import clsx` vào dự án, để có thể sử dụng chúng ta có thể gọi như sau đối với class tĩnh: `clsx(className1, className2, ...)`
+
+    ```js
+    import clsx from "clsx";
+    import styles from "./Css.module.css";
+    function Index() {
+        return (
+            <h1 className={clsx(styles.header, styles.active)}>
+                Css from Pararap
+            </h1>
+        );
+    }
+    export default Index;
+    ```
+
+-   Đối với class động lúc có lúc không thì ta dùng:`clsx(tên class tĩnh, {[tên class động ]: true or false})` với true thì nó sẽ hoạt động và ngược lại
