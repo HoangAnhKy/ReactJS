@@ -89,3 +89,4 @@
     ```
 
 -   Đối với class động lúc có lúc không thì ta dùng:`clsx(tên class tĩnh, {[tên class động ]: true or false})` với true thì nó sẽ hoạt động và ngược lại
+-   Với css thường khi sử dụng `clsx` động như sau `clsx(tên class tĩnh, {'tên class động' : true or false})`
