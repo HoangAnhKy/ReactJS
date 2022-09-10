@@ -1,8 +1,8 @@
-import { ADD_ACTION, REMOVE_ACTION, SET_JOB, SET_PRICE } from "./action";
+import { ADD_ACTION, REMOVE_ACTION, SET_JOB, SET_PRICE } from './action';
 
 export const initState = {
-    job: "",
-    price: "",
+    job: '',
+    price: '',
     jobs: [],
 };
 

@@ -5,14 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Test Create Element Width Function</title>
-        <script
-            src="https://unpkg.com/react@18/umd/react.development.js"
-            crossorigin
-        ></script>
-        <script
-            src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
-            crossorigin
-        ></script>
+        <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
         <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
         <style type="text/css">
@@ -84,21 +78,17 @@
 
         <script type="text/babel">
             function Blog(props) {
-                props.callback("hi");
+                props.callback('hi');
                 return (
-                    <div className="post_item">
-                        <div className="item_left">
-                            <h2 className="post_title">{props.title}</h2>
-                            <p className="post_content">
-                                Bài viết này là chỉnh sửa và cập nhật của bài
-                                viết...
-                            </p>
-                            <p className="post_time">
-                                <button>Javascript</button> một tháng trước·7
-                                phút đọc
+                    <div className='post_item'>
+                        <div className='item_left'>
+                            <h2 className='post_title'>{props.title}</h2>
+                            <p className='post_content'>Bài viết này là chỉnh sửa và cập nhật của bài viết...</p>
+                            <p className='post_time'>
+                                <button>Javascript</button> một tháng trước·7 phút đọc
                             </p>
                         </div>
-                        <div className="item_right">
+                        <div className='item_right'>
                             <img src={props.src} alt={props.title} />
                         </div>
                     </div>
@@ -108,53 +98,44 @@
             class Blog2 extends React.Component {
                 render() {
                     return (
-                        <div className="post_item">
-                            <div className="item_left">
-                                <h2 className="post_title">
-                                    {this.props.title}
-                                </h2>
-                                <p className="post_content">
-                                    Bài viết này là chỉnh sửa và cập nhật của
-                                    bài viết...
-                                </p>
-                                <p className="post_time">
-                                    <button>Javascript</button> một tháng
-                                    trước·7 phút đọc
+                        <div className='post_item'>
+                            <div className='item_left'>
+                                <h2 className='post_title'>{this.props.title}</h2>
+                                <p className='post_content'>Bài viết này là chỉnh sửa và cập nhật của bài viết...</p>
+                                <p className='post_time'>
+                                    <button>Javascript</button> một tháng trước·7 phút đọc
                                 </p>
                             </div>
-                            <div className="item_right">
-                                <img
-                                    src={this.props.src}
-                                    alt={this.props.title}
-                                />
+                            <div className='item_right'>
+                                <img src={this.props.src} alt={this.props.title} />
                             </div>
                         </div>
                     );
                 }
             }
             const app = (
-                <div className="post_list">
+                <div className='post_list'>
                     <Blog
-                        title="LM Theme | Cách tạo theme VSCode và Publish lên Marketplace"
-                        src="https://files.fullstack.edu.vn/f8-prod/blog_posts/3930/62b7ef8ce02a3.png"
+                        title='LM Theme | Cách tạo theme VSCode và Publish lên Marketplace'
+                        src='https://files.fullstack.edu.vn/f8-prod/blog_posts/3930/62b7ef8ce02a3.png'
                         callback={(obj) => {
                             console.log(obj);
                         }}
                     />
                     <Blog
-                        title="LM Theme | Cách tạo theme VSCode và Publish lên Marketplace"
-                        src="https://files.fullstack.edu.vn/f8-prod/blog_posts/3930/62b7ef8ce02a3.png"
+                        title='LM Theme | Cách tạo theme VSCode và Publish lên Marketplace'
+                        src='https://files.fullstack.edu.vn/f8-prod/blog_posts/3930/62b7ef8ce02a3.png'
                         callback={(obj) => {
                             console.log(obj);
                         }}
                     />
                     <Blog2
-                        title="Setup Môi Trường Lập Trình Nhanh Chóng Cho Desktop. Phần 1: Lý thuyết"
-                        src="https://files.fullstack.edu.vn/f8-prod/blog_posts/3900/62b4484da0c77.jpg"
+                        title='Setup Môi Trường Lập Trình Nhanh Chóng Cho Desktop. Phần 1: Lý thuyết'
+                        src='https://files.fullstack.edu.vn/f8-prod/blog_posts/3900/62b4484da0c77.jpg'
                     />
                 </div>
             );
-            const container = document.getElementById("root");
+            const container = document.getElementById('root');
             const root = ReactDOM.createRoot(container);
             root.render(app);
         </script>
