@@ -1,10 +1,10 @@
 // khai báo DOM
-const DOM = document.getElementById("render_html");
-const form = document.getElementById("form_course");
+const DOM = document.getElementById('render_html');
+const form = document.getElementById('form_course');
 let html = [];
 
-const API = "http://localhost:3000/courses";
-var APIUpdate = "";
+const API = 'http://localhost:3000/courses';
+var APIUpdate = '';
 const start = () => {
     getCourse(API, renderCourse);
     buttonCreate(API, CUD);
@@ -16,25 +16,25 @@ const renderCourse = (data) => {
                     <td>${obj.id}</td>
                     <td>${obj.name}</td>
                     <td>
-                        <a href="${API + "/" + obj.id}" class="btn btn-primary">
+                        <a href="${API + '/' + obj.id}" class="btn btn-primary">
                             Cập nhật
                         </a>
                     </td>
                     <td>
-                        <a href="${API + "/" + obj.id}" class="btn btn-danger">
+                        <a href="${API + '/' + obj.id}" class="btn btn-danger">
                             Xóa
                         </a>
                     </td>
                 </tr>`;
     });
-    DOM.innerHTML = html.join("");
+    DOM.innerHTML = html.join('');
     AddEven();
 };
 const render_form = (data) => {
-    let name = form.querySelector("input[name=name]");
-    let btn = form.querySelector("button");
+    let name = form.querySelector('input[name=name]');
+    let btn = form.querySelector('button');
     name.value = data.name;
-    btn.innerText = "Cập nhật";
+    btn.innerText = 'Cập nhật';
     buttonupdate(APIUpdate, CUD);
 };
 const getCourse = (API, callback) => {
@@ -48,7 +48,7 @@ const CUD = (method, data, API, callback) => {
     const options = {
         method: method,
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
     };
@@ -59,45 +59,45 @@ const CUD = (method, data, API, callback) => {
 };
 
 const buttonCreate = (APIrender, callback) => {
-    let btn = form.querySelector("button");
+    let btn = form.querySelector('button');
 
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener('click', (e) => {
         e.preventDefault();
-        let nameRequest = form.querySelector("input[name=name]").value;
+        let nameRequest = form.querySelector('input[name=name]').value;
         let data = {
             name: nameRequest,
         };
-        if (btn.innerText === "Xác nhận") {
-            callback("POST", data, APIrender, getCourse(API, renderCourse));
-        } else if (btn.innerText === "Cập nhật") {
-            callback("PUT", data, APIrender, getCourse(API, renderCourse));
-            btn.innerText = "Xác nhật";
+        if (btn.innerText === 'Xác nhận') {
+            callback('POST', data, APIrender, getCourse(API, renderCourse));
+        } else if (btn.innerText === 'Cập nhật') {
+            callback('PUT', data, APIrender, getCourse(API, renderCourse));
+            btn.innerText = 'Xác nhật';
         }
     });
 };
 const buttonupdate = (APIrender, callback) => {
-    let btn = form.querySelector("button");
+    let btn = form.querySelector('button');
 
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener('click', (e) => {
         e.preventDefault();
-        let nameRequest = form.querySelector("input[name=name]").value;
+        let nameRequest = form.querySelector('input[name=name]').value;
         let data = {
             name: nameRequest,
         };
-        callback("PUT", data, APIrender, getCourse(API, renderCourse));
-        btn.innerText = "Xác nhật";
+        callback('PUT', data, APIrender, getCourse(API, renderCourse));
+        btn.innerText = 'Xác nhật';
     });
 };
 
 let AddEven = () => {
-    const list_btn = DOM.querySelectorAll("a");
+    const list_btn = DOM.querySelectorAll('a');
     list_btn.forEach((obj) => {
-        obj.addEventListener("click", (e) => {
+        obj.addEventListener('click', (e) => {
             e.preventDefault();
             APIUpdate = obj.href;
-            if (obj.innerText === "Xóa") {
-                CUD("Delete", {}, APIUpdate, getCourse(API, renderCourse));
-            } else if (obj.innerText === "Cập nhật") {
+            if (obj.innerText === 'Xóa') {
+                CUD('Delete', {}, APIUpdate, getCourse(API, renderCourse));
+            } else if (obj.innerText === 'Cập nhật') {
                 getCourse(APIUpdate, render_form);
             }
         });

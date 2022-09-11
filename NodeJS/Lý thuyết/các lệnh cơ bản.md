@@ -22,9 +22,18 @@ npm init
 npm i express
 ```
 
+-   Muốn lắng nghe các file tĩnh thì ta chỉ cần sử dụng
+
+```js
+//...
+app.use(express.static(path.join(__dirname, 'public')));
+// ...
+```
+
 #### _Cài thư viện nodemon_
 
-    Dùng để lắng nghe sự thay đổi của ứng dụng và reload lại ứng dụng và dùng để debug chương trình khi lỗi
+-   Dùng để lắng nghe sự thay đổi của ứng dụng và reload lại ứng dụng và dùng để debug chương trình khi lỗi
+-   Muốn lắng nghe nhiều file thì chỉ cần tạo thêm `nodemon.json` song song với package.json và cấu hình `ext: ' đuôi file muốn lắng nghe'`
 
 ```sh
 npm i nodemon --save-dev
@@ -108,3 +117,19 @@ app.get('/', (req, res) => {
 
     -   {{{file cần gọi không phải partials}}}
     -   {{>partials}}
+
+#### _Cài đặt SCSS_
+
+```sh
+npm i node-sass --save-dev
+```
+
+-   Muốn tạo file css từ file scss ta vào file `package.json` sau đó chạy lệnh `npm run watch`
+
+```js
+//...
+"scripts": {
+        "watch": "node-sass --watch [đường dẫn thư mục sass] --output [đường dẫn thư mục css]"
+    },
+//...
+```

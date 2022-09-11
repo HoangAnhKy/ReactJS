@@ -1,12 +1,16 @@
 {
-  "courses": [
-    {
-      "name": "ReactJS",
-      "id": 1
-    },
-    {
-      "id": 2,
-      "name": "Laravel"
-    }
-  ]
+    "courses": [
+        {
+            "name": "ReactJS",
+            "id": 1
+        },
+        {
+            "id": 2,
+            "name": "Laravel"
+        },
+        {
+            "name": "SQL SERVER",
+            "id": 3
+        }
+    ]
 }
