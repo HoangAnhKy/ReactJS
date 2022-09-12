@@ -4,16 +4,25 @@
 
     - Khởi tạo 3 fordle cơ bản như sau
 
-    ```sh
+```js
     src
     └── app
-        └── controllers
-        └── modules
-    └── routesd
+        └── controllers // cần chú ý
+        └── modules  // cần chú ý
+    └── public
+        └── Css
+        └── img
+    └── resources
+        └── Scss
+        └── views
+    └── routers  // cần chú ý
         └── index.js // Router chính
         └── web.js // groups các router thuộc web
-    └── views
-    ```
+    └── index.js // gốc
+    └── packages-lock.json
+    └── packages.json
+
+```
 
 # Khởi tạo file Controllers
 
