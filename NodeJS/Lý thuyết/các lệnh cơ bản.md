@@ -48,6 +48,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 // ...
 ```
 
+-   Lắng nghe dữ liệu trả về qua các phương thức `http protocol`
+
+```js
+//...
+
+//Middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// nhận dữ liệu
+app.post('/content', (req, res) => {
+    // truyền dữ liệu nhận được qua data
+    res.render('content', { data: req.body });
+    // để nhận dữ liệu bên view ta dùng {{{ tên đường dẫn qua và kèm theo đối tượng}}}
+});
+// ...
+```
+
 #### _Cài thư viện nodemon_
 
 -   Dùng để lắng nghe sự thay đổi của ứng dụng và reload lại ứng dụng và dùng để debug chương trình khi lỗi
