@@ -4,7 +4,7 @@
     "description": "Thực hành tạo dự án với nodejs",
     "main": "src/index.js",
     "scripts": {
-        "start": "nodemon --inspect src/index.js",
+        "start": "concurrently \"nodemon --inspect src/index.js\" \"npm run watch\"",
         "watch": "node-sass --watch src/resources/scss --output src/public/Css",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -18,6 +18,7 @@
         "express-handlebars": "^6.0.6"
     },
     "devDependencies": {
+        "concurrently": "^7.4.0",
         "node-sass": "^7.0.3",
         "nodemon": "^2.0.19"
     }

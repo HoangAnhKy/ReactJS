@@ -9,11 +9,29 @@
 
 # **CÁC LỆNH KHỞI TẠO CƠ BẢN**
 
--   _Khởi tạo dự án_
-    Có thể thêm các thông tin cùng với thông báo
+#### _Khởi tạo dự án_
+
+-   Có thể thêm các thông tin cùng với thông báo
 
 ```sh
 npm init
+```
+
+-   Cài thêm thư viện sau vào devDependencies để có thể chạy song song nhiều thư viện một lúc trong package.json
+
+```sh
+npm install concurrently --save-dev
+```
+
+-   Trong file package.json ta cấu hình `start` như sau:
+
+```js
+//...
+"scripts": {
+        "start": "concurrently \"tập lệnh cần chạy 1\" \"tập lệnh cần chạy 2\""
+        //vd  "start": "concurrently \"nodemon --inspect src/index.js\" \"npm run watch\"",
+    },
+//...
 ```
 
 #### _Cài thư viện Expression_
