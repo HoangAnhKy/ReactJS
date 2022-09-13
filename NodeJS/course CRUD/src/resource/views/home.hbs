@@ -1,0 +1,20 @@
+<h1 class='color_red'>Hello ae</h1>
+
+<a href='/create' class="btn btn-success">Thêm lớp</a>
+
+<table class='table'>
+    <tr>
+        <th>#</th>
+        <th>Tên lớp</th>
+        <th>Cập nhật</th>
+        <th>Xóa</th>
+    </tr>
+    {{#each data}}
+        <tr>
+            <td>{{this.id}}</td>
+            <td>{{this.name}}</td>
+            <td><a href="/edit/{{this.id}}" class="btn btn-success"> Cập nhật</td>
+            <td><a href="/delete/{{this.id}}" class="btn btn-danger"> Xóa</td>
+        </tr>
+    {{/each}}
+</table>

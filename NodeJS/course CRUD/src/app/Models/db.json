@@ -1,0 +1,24 @@
+{
+  "courses": [
+    {
+      "name": "ReactJS",
+      "id": 1
+    },
+    {
+      "name": "Laravel 9",
+      "id": 2
+    },
+    {
+      "name": "SQL SERVER",
+      "id": 3
+    },
+    {
+      "name": "React Native",
+      "id": 5
+    },
+    {
+      "name": "MySQL",
+      "id": 6
+    }
+  ]
+}
