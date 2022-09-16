@@ -3,6 +3,9 @@ const path = require('path');
 const express = require('express');
 const handlebars = require('express-handlebars');
 const router = require('./routers');
+
+const db = require('./config/db');
+db.connect();
 const app = express();
 const port = 3000;
 
