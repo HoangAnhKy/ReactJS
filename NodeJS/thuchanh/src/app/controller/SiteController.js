@@ -5,6 +5,7 @@ class SiteController {
             .then((course) => res.json(course))
             .catch((error) => next(error));
     }
+    
 }
 
 module.exports = new SiteController();

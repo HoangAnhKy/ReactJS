@@ -169,3 +169,40 @@ npm i node-sass --save-dev
     },
 //...
 ```
+
+#### _Cài đặt thư viện mongoose_
+
+##### Cài đặt mongoose để connect dữ liệu
+
+```sh
+ npm install mongoose
+```
+
+##### Cài plugin slug để tạo slug
+
+```sh
+ npm i mongoose-slug-generator --save
+```
+
+##### Cài đặt method-override để chuyển đổi phương thức được gửi lên server
+
+```js
+npm install method-override
+```
+
+-   Cách dùng khai báo thư viện ở `index chính`
+
+```js
+//...
+const methodOverride = require('method-override');
+
+app.use(methodOverride('X-HTTP-Method-Override'));
+```
+
+-   ở View chỉ cần dùng lại như sau
+
+```js
+<form method='POST' action='/resource?_method=DELETE'>
+    <button type='submit'>Delete resource</button>
+</form>
+```
