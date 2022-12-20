@@ -511,7 +511,7 @@ export default Pararap;
         import { forwardRef } from "react";
         import video1 from "./video/download.mp4";
 
-        function Video({Props, ref) {
+        function Video({Props, ref}) {
             return <video ref={ref} src={video1} width={280} height={500} />;
         }
         export default forwardRef(Video); // Nhận dữ liệu

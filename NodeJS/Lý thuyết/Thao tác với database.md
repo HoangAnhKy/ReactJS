@@ -104,7 +104,10 @@ const Course = require('../models/Course');
 class SiteController {
     index(req, res, next) {
         Course.find({})
-            .then((course) => res.json(course))
+            .then((course) => {
+                const Course = course.map((cs) => cs.toObject());
+                res.json(course);
+            })
             .catch((error) => next(error));
     }
 }

@@ -18,3 +18,18 @@
 ```sh
 npm install node-fetch@2
 ```
+
+# **Viết hàm trong hbs**
+
+```js
+app.engine(
+    'hbs',
+    handlebars.engine({
+        extname: '.hbs',
+        helpers: {
+            sum: (a, b) => a + b, // hàm
+            //cách dùng sum @index 1 <=> hàm, a , b
+        },
+    })
+);
+```

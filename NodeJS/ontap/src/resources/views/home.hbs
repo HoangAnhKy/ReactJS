@@ -1,0 +1,19 @@
+<a class='btn btn-primary m-2' href='/create'>Thêm mới</a>
+<table class='table'>
+    <thead>
+        <tr>
+            <th scope='col'>id</th>
+            <th scope='col'>name</th>
+            <th scope='col'>img</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each Course}}
+            <tr>
+                <th scope='row'>{{sum @index 1}}</th>
+                <td>{{this.name}}</td>
+                <td>{{this.img}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
