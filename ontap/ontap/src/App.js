@@ -1,6 +1,10 @@
-import { UseContext } from './HooksUseState';
+import { TestRouter, Router } from './Router';
 function App() {
-    return <UseContext />;
+    return (
+        <>
+            <Router />
+        </>
+    );
 }
 
 export default App;
