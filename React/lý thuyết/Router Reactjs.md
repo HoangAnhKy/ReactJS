@@ -18,14 +18,14 @@
 
     ```jsx
     // index.js;
-    import React from "react";
-    import ReactDOM from "react-dom/client";
-    import { BrowserRouter } from "react-router-dom";
+    import React from 'react';
+    import ReactDOM from 'react-dom/client';
+    import { BrowserRouter } from 'react-router-dom';
 
-    import "./index.css";
-    import App from "./App";
+    import './index.css';
+    import App from './App';
 
-    const root = ReactDOM.createRoot(document.getElementById("root"));
+    const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
         <React.StrictMode>
             <BrowserRouter>
@@ -43,10 +43,10 @@
     -   `Link` giống như thẻ a trong html nhưng không reload lại trang
 
     ```js
-    import { Routes, Route, Link } from "react-router-dom";
-    import Home from "./Home";
-    import About from "./About";
-    import Context from "./Context";
+    import { Routes, Route, Link } from 'react-router-dom';
+    import Home from './Home';
+    import About from './About';
+    import Context from './Context';
 
     function App() {
         return (
@@ -54,26 +54,64 @@
                 <nav>
                     <ul>
                         <li>
-                            <Link to="/"> Home </Link>
+                            <Link to='/'> Home </Link>
                         </li>
                         <li>
-                            <Link to="/About"> About </Link>
+                            <Link to='/About'> About </Link>
                         </li>
                         <li>
-                            <Link to="/Context"> Context </Link>
+                            <Link to='/Context'> Context </Link>
                         </li>
                     </ul>
                 </nav>
                 // Chỗ này thay đổi dữ liệu
                 <Routes>
-                    <Route path="/" element={<Home />}>
-                     //path trùng với to trong link mới gọi được reactElement
-                    <Route path="/About" element={<About />}>
-                    <Route path="/Context" element={<Context />}>
+                    <Route path='/' element={<Home />} />
+                    //path trùng với to trong link mới gọi được reactElement
+                    <Route path='/About' element={<About />} />
+                    <Route path='/Context' element={<Context />} />
                 </Routes>
-
             </div>
         );
     }
     export default App;
     ```
+
+# OutLet
+
+<!-- nav -->
+
+```js
+<Routes>
+    <Route path='/' element={<TestRouter />}>
+        <Route index element={<Home />} />
+        <Route path='/Praram' element={<Praram />} />
+        <Route path='/Context' element={<Context />} />
+    </Route>
+</Routes>
+```
+
+<!-- TestRouter -->
+
+```js
+function TestRouter() {
+    return (
+        <div>
+            <nav className='nav'>
+                <ul>
+                    <li>
+                        <Link to='/'> Home </Link>
+                    </li>
+                    <li>
+                        <Link to='/Praram'> Praram </Link>
+                    </li>
+                    <li>
+                        <Link to='/Context'> Context </Link>
+                    </li>
+                </ul>
+            </nav>
+            <Outlet />
+        </div>
+    );
+}
+```

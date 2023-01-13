@@ -1,4 +1,4 @@
-<!-- # **Lưu ý:**
+# **Lưu ý:**
 
 -   `--save-dev` dùng để lưu vào devDependencies của package.json
 -   `--watch dùng` để lắng nghe
@@ -205,4 +205,4 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 <form method='POST' action='/resource?_method=DELETE'>
     <button type='submit'>Delete resource</button>
 </form>
-``` -->
+```

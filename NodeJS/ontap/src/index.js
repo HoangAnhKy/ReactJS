@@ -1,31 +1,23 @@
 const path = require('path');
 const express = require('express');
-const methodOverride = require('method-override');
-
-const handlebars = require('express-handlebars');
-const db = require('./config/db');
-
-const router = require('./routers');
+const hdb = require('express-handlebars');
 const app = express();
-const port = 5000;
-
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+const port = 3000;
 
 app.engine(
-    'hbs',
-    handlebars.engine({
-        extname: '.hbs',
-        helpers: {
-            sum: (a, b) => a + b,
-        },
+    'lmht',
+    hdb.engine({
+        extname: '.lmht', // đổi tên đuôi
     })
 );
-app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'resources', 'views'));
+app.set('view engine', 'lmht'); // sử dụng nội dung đã khai báo
+app.set('views', path.join(__dirname, 'resources\\views'));
 
-router(app);
-db.connect();
-app.use(methodOverride('X-HTTP-Method-Override'));
+app.get('/', (req, res) => {
+    // res.send('Welcome to the Google');
+    res.render('home');
+});
 
-app.listen(port, () => console.log(`Server listening on port http://localhost:${port}/`));
+app.listen(port, () => {
+    console.log(`listening on localhost:${port}`);
+});

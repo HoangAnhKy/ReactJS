@@ -1,0 +1,16 @@
+{
+  "courses": [
+    {
+      "nameCourse": "laravel 3",
+      "id": 2
+    },
+    {
+      "nameCourse": "123",
+      "id": 3
+    },
+    {
+      "nameCourse": "laravel 30",
+      "id": 4
+    }
+  ]
+}
