@@ -1,0 +1,1 @@
+<a href="?action=course">course</a>

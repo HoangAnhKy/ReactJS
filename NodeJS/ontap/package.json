@@ -4,15 +4,21 @@
     "description": "",
     "main": "src/index.js",
     "scripts": {
-        "start": "nodemon --inspect src/index.js"
+        "start": "concurrently \"nodemon --inspect src/index.js\" \"npm run watch\"",
+        "watch": "node-sass -w src/resources/scss -o src/public/css",
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "express": "^4.18.2",
-        "express-handlebars": "^6.0.6"
+        "express": "^4.18.1",
+        "express-handlebars": "^6.0.6",
+        "method-override": "^3.0.0",
+        "mongoose": "^6.6.1"
     },
     "devDependencies": {
+        "concurrently": "^7.4.0",
+        "node-sass": "^7.0.3",
         "nodemon": "^2.0.20"
     }
 }
