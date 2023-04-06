@@ -1,16 +1,24 @@
 {
-  "courses": [
-    {
-      "name": "ReactJS",
-      "id": 1
-    },
-    {
-      "name": "SQL SERVER",
-      "id": 3
-    },
-    {
-      "name": "SQL",
-      "id": 4
-    }
-  ]
+    "courses": [
+        {
+            "name_project": "12312",
+            "user_transfer": "1",
+            "amount_user": "1",
+            "start_day": "0232-02-11",
+            "end_day": "0321-02-12",
+            "description": "123123123123",
+            "active": "0",
+            "id": 11
+        },
+        {
+            "name_project": "123123",
+            "user_transfer": "tèo",
+            "amount_user": "244667678",
+            "start_day": "2023-03-23",
+            "end_day": "2023-03-28",
+            "description": "",
+            "active": "1",
+            "id": 12
+        }
+    ]
 }

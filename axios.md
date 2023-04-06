@@ -67,6 +67,30 @@ async function getUser() {
 }
 ```
 
+nên gọi theo kiểu api
+
+```js
+// get
+axios({
+    method: 'get',
+    url: 'https://bit.ly/2mTM3nY',
+    responseType: 'js',
+}).then(function (response) {
+    console.log(response.data);
+});
+
+// post
+
+axios({
+  method: 'post',
+  url: '/user/12345',
+  data: {
+    lastName: 'Lý'
+    firstName: 'Thường Kiệt',
+  }
+});
+```
+
 # sử dụng API endpoint (điểm cuối truy cập)
 
 -   Tạo 1 thư mục ở src vd như `utils/http.js` sau đó khai báo như sau. Sử dụng axios.create để khởi tạo sau đó muốn sử dụng thì chúng ta chỉ việc import file này thay vì import axios.
