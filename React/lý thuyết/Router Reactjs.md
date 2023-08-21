@@ -79,11 +79,11 @@
   export default App;
   ```
 
-# _Hash Router_
+# **Hash Router**
 
 được sử dụng trong các trình duyệt web khi URL không nên (hoặc không thể) được gửi đến máy chủ vì một số lý do. Điều này có thể xảy ra trong một số tình huống lưu trữ được chia sẻ khi bạn không có toàn quyền kiểm soát máy chủ. Trong những trường hợp này URL sẽ có thêm dấu # sẽ chỉ có thể chạy giao diện thôi.
 
-# _memoryrouter_
+# **memoryrouter**
 
 được dùng để chạy toàn bộ Route trong nó chạy dưới URL mặc định đó. với `initialEntries` là đầu vào sẽ hiện thị Component với Path bằng nó và khi chuyển component vẫn giữ nguyên URL
 
@@ -134,4 +134,15 @@ function TestRouter() {
     </div>
   );
 }
+```
+
+# Lưu ý
+
+- Khi dùng các `hookRouter` thì phải dùng chung với các hàm khởi tạo `Router` phải khởi tạo `<Router action={fc}` và gọi `function` được tạo trong `component` đó
+
+- Dùng `Action` mới có thể `redirect` được, và khi dùng action thì các các `hooks của reacjs` sẽ không có tác dụng phải dùng tới `request` để lấy
+
+```js
+from = request.fromData();
+data = object.fromEntires(from);
 ```
