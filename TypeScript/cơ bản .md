@@ -1,5 +1,11 @@
-- muốn dùng `ts` thì phải conver về `js` bằng cách dùng lệnh `tsc file.ts` hoặc `ts-node file.ts` để chạy ngay lập tức.
+- Muốn dùng `ts` thì phải conver về `js` bằng cách dùng lệnh `tsc file.ts` hoặc `ts-node file.ts` để chạy ngay lập tức.
 - `TS` cú pháp khá là giống `js` chỉ có khác một số thành phần như sau
+
+- Muốn tạo project `TS` thì dùng lệnh sau, tham khảo tại [link](https://create-react-app.dev/docs/adding-typescript)
+
+```sh
+npx create-react-app my-app --template typescript
+```
 
 # Khác về khai báo biến
 
