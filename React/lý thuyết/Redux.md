@@ -2,6 +2,12 @@
 
 Cách hoạt động sẽ là `Action` gọi tới `dispatch` để tiến hành ghi lại giữ liệu. Trong đó `dispatch` sẽ gọi tới `reducer` để kiểm tra các hoạt động có thể thực hiện sau đó set lại `state` và trả về `View` và từ view muốn thao tác gì lại gọi `Action`.
 
+- chú ý các function hỗ trợ trong state:
+  getState -> lấy giá trị trong state.
+  dispatch -> Xử lý thay đổi các giá trị thay đổi.
+  subscribe -> Thông báo thay đổi cho các bên liên quan ( được gọi thông callback)
+
+[xem demo]()
 ví dụ
 
 ```js
