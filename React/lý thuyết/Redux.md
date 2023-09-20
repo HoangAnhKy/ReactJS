@@ -7,7 +7,7 @@ Cách hoạt động sẽ là `Action` gọi tới `dispatch` để tiến hành
   dispatch -> Xử lý thay đổi các giá trị thay đổi.
   subscribe -> Thông báo thay đổi cho các bên liên quan ( được gọi thông callback)
 
-[xem demo]()
+[xem demo](https://github.com/HoangAnhKy/ReactJS/tree/main/React/Demo%20Redux)
 ví dụ
 
 ```js
