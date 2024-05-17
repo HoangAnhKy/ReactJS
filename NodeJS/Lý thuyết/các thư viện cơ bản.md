@@ -101,7 +101,7 @@ npm i morgan --save-dev
 ```js
 const morgan = require('morgan');
 //...
-app.use(morgan('combine'));
+app.use(morgan('combined'));
 ```
 
 #### _Cài đặt thư viện handlebars_
