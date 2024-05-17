@@ -40,11 +40,15 @@ npm install concurrently --save-dev
 npm i express
 ```
 
--   Muốn lắng nghe các file tĩnh thì ta chỉ cần sử dụng
+-   Muốn lắng nghe các file tĩnh thì ta chỉ cần sử dụng, có thể sử dụng để dùng `package` nào đó ở trong `node_modules`
 
 ```js
 //...
 app.use(express.static(path.join(__dirname, 'public')));
+
+// sử dụng trong node boostrap và jquery ở node_modules
+app.use(express.static("./node_modules/bootstrap/dist/"));
+app.use(express.static("./node_modules/jquery/dist/"));
 // ...
 ```
 
