@@ -33,3 +33,16 @@ app.engine(
     })
 );
 ```
+
+# **Xử dụng helper và tạo helper trong handlebar**
+
+```js
+
+// ...
+ // using helper for handlebar
+    let hbs = handlebars.create({});
+    hbs.handlebars.registerHelper('inc', function(value) {
+        return parseInt(value) + 1;
+    });
+// ...
+```
