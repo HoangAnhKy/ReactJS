@@ -46,3 +46,27 @@ app.engine(
     });
 // ...
 ```
+
+# **Search like trong mongoose**
+
+- phải xử dụng regex để tìm kiếm like giống như trong mysql, sql, ...
+
+```js
+  async getOne(req, res, next) {
+        let key_search = req.params.key_search;
+        let regex = new RegExp(key_search, 'i');
+
+        const condition = [
+            {name: regex},
+        ];
+
+        try {
+            let data = await course.findOne().or(condition) ?? []
+            res.status(200).json(data);
+        } catch (e) {
+            res.status(400).json({"msg": e.message ?? "Error"});
+        }
+    }
+```
+
+
