@@ -126,3 +126,10 @@ await Character.create({ name: 'Jean-Luc Picard' });
 await Character.exists({ name: /picard/i }); // { _id: ... }
 await Character.exists({ name: /riker/i }); // null
  ```
+
+# Sắp xếp Sort
+
+```js
+await Person.find().sort({ age: -1 }); // sort một
+await Person.find().sort({ age: 1, weight: -1 }); // sort nhiều 
+```
