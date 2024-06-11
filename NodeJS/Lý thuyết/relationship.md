@@ -53,6 +53,7 @@ User.virtual('Course', {
     localField: 'name_course',  // Trường trong UserSchema
     foreignField: 'name',  // Trường trong courseSchema
     justOne: true,  // Chỉ lấy một tài liệu (không phải mảng)
+    count: true, // Trả về số lượng phần tử join, data trả về là kiểu int(mỗi số lượng thôi)
 });
 
 // Đảm bảo rằng các dữ liệu sẽ được hiện thị bao gồm khi chúng ta chuyển đổi các tài liệu sang Object hoặc JSON.
@@ -60,4 +61,21 @@ User.set('toObject', { virtuals: true });
 User.set('toJSON', { virtuals: true });
 
 module.exports = mongoose.model('User', User);
+```
+
+# Muốn truy xuất dữ liệu, where các kiểu thêm ở trong relationship thì dùng `Math`
+
+- có thể dùng như sau 
+
+```js
+    // trong `Schema`
+    User.virtual('Course', {
+        ref: 'Course',
+        localField: '_id',
+        foreignField: 'author',
+        match: author => ({ isDeleted: false })
+    });
+
+    // hoặc trong query
+    await Author.findOne().populate({ path: posts, match: {} });
 ```
