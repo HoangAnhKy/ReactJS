@@ -1,26 +1,43 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <title>Socket.io Demo</title>
-      <meta charset="utf-8">
-		<link rel="stylesheet" href="styles.css">
-   </head>
-   <body>
-		 <h1>Socket.io Demo</h1>	 
-		 <p id="buttonCount">The button has been clicked 0 times.</p>
-		 <button onclick="buttonClicked()">Click me</button>
-		 <script src="/socket.io/socket.io.js"></script>
-		 <script>
-			 let socket = io.connect();
-			 
-			 function buttonClicked(){
-			   socket.emit('clicked');
-			 }
-			 
-			 //when we receive buttonUpdate, do this
-			 socket.on('buttonUpdate', function(data){
-				 document.getElementById("buttonCount").innerHTML = 'The button has been clicked ' + data + ' times.';
-			 });
-		</script>
-   </body>
+<head>
+	<title>Socket.io Demo</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h1>Chat clone </h1>
+<form method="get">
+	<input name="messenger" id="msg_user">
+	<input name="user" id="user" value="server" hidden="hidden">
+	<button onclick="buttonClicked()" type="button">send</button>
+
+	<div id="history">
+
+	</div>
+</form>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+	let socket = io.connect();
+
+	function buttonClicked() {
+		let msg = document.getElementById('msg_user').value;
+		let user = document.getElementById('user').value;
+		socket.emit("room_1", {
+			user,
+			msg
+		});
+		document.getElementById('msg_user').value = "";
+	}
+
+	//when we receive buttonUpdate, do this
+	socket.on('room_reps', function (data) {
+		let html = "";
+		for (let msg_info of data) {
+			html += `<p>${msg_info.user}: ${msg_info.msg} </p>`
+		}
+		document.getElementById('history').innerHTML = html;
+	});
+</script>
+</body>
 </html>

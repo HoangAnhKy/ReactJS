@@ -12,15 +12,15 @@ app.get('/', function(req, res,next) {
 app.get('/users', function(req, res,next) {  
     res.sendFile(__dirname + '/public/users.html');
 });
-let clickCount = 0;
+let list_chat = [];
 //when a client connects, do this
 io.on('connection', function(client) {
     console.log('Client connected...');
     //when the server receives clicked message, do this
-    client.on('clicked', function(data) {
-        clickCount++;
+    client.on('room_1', function(data) {
+        list_chat.push(data)
         //send a message to ALL connected clients
-        io.emit('buttonUpdate', clickCount);
+        io.emit('room_reps', list_chat);
     });
 });
 
