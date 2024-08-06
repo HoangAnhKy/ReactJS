@@ -32,11 +32,16 @@
     let list_chat = [];
     io.on('connection', function(client) {
         console.log('Client connected...');
-
+        // join room and send data
         client.on('send_message', function(data) {
             list_chat.push(data)
             client.join(data.room);
             io.to(data.room).emit('room_reps', list_chat);
+        });
+
+        // out room
+        client.on('leave', function(data) {
+            client.leave(data.room);
         });
     });
 ```
