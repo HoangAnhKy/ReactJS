@@ -27,6 +27,18 @@
         console.log(arg); // "world"
         callback("got it");
     });
+
+    // gửi dữ liệu qua room
+    let list_chat = [];
+    io.on('connection', function(client) {
+        console.log('Client connected...');
+
+        client.on('send_message', function(data) {
+            list_chat.push(data)
+            client.join(data.room);
+            io.to(data.room).emit('room_reps', list_chat);
+        });
+    });
 ```
 
 ```js
