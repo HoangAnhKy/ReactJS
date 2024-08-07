@@ -72,6 +72,13 @@ module.exports = mongoose.model('User', User);
 
 ## khởi tạo validate
 
+- Dưới đây là danh sách các từ khóa mẫu được hỗ trợ:
+
+  PATH: Đường dẫn lược đồ nơi lỗi được kích hoạt.
+  VALUE: Giá trị được gán cho PATH đang kích hoạt lỗi.
+  KIND: Thuộc tính xác thực kích hoạt lỗi, tức là bắt buộc.
+  REASON: Đối tượng lỗi gây ra lỗi này nếu có.
+
 ```js
 
 const mongoose = require('mongoose');
