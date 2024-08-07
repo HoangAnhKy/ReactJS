@@ -99,7 +99,7 @@ const User = new Schema({
 
 module.exports = mongoose.model('User', User);
 ```
-
+## validate schema in controller
 ```js
   async changePassword(req: Request | any, res: Response) {
     // ...
