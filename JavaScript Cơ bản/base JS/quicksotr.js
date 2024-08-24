@@ -48,6 +48,16 @@ const bubbleSort = (arr) => {
     return arr;
 };
 
+// ----- search 
+
+const searchBinary = (arr, target, start, end) => {
+    if (start > end) return -1;
+    let mid = Math.floor((start + end) / 2);
+    if (arr[mid] === target) return mid;
+    return arr[mid] < target ? searchBinary(arr, target, mid + 1, end) : searchBinary(arr, target, start, mid - 1);
+}
+
+
 console.log(mergeSort([1, 5, 4, 2, 6, 3, 7, 9, 8, 10, 0]));
 console.log(quickSort([1, 5, 4, 2, 6, 3, 7, 9, 8, 10, 0]));
 console.log(bubbleSort([1, 5, 4, 2, 6, 3, 7, 9, 8, 10, 0]));
