@@ -1,45 +1,53 @@
+const mergeSort = (arr) =>  {
+    const handle = (left, right) => {
+        let merge = [];
+        while (left.length && right.length) {
+            merge.push((left[0] < right[0]) ? left.shift() : right.shift());
+        }
+        return [...merge, ...left, ...right];
+    }
+
+    if (arr.length < 2) return arr;
+
+    let mid = Math.floor(arr.length / 2);
+    let right = [...arr];
+    let left = right.splice(0, mid);
+    return handle(mergeSort(left), mergeSort(right))
+}
+
 const quickSort = (arr) => {
     if (arr.length < 2) return arr;
 
-    const pivotIndex = arr.length - 1;
-    const pivot = arr[pivotIndex];
-
-    const left = [];
-    const right = [];
-
-    let currentItem;
-    for (let i = 0; i < pivotIndex; i++) {
-        currentItem = arr[i];
-        if (currentItem < pivot) {
-            left.push(currentItem);
-        } else {
-            right.push(currentItem);
+    const [left, right] = [[], []];
+    const mid = Math.floor(arr.length / 2);
+    const value_check = arr[mid] ?? 0;
+    for (let i = 0; i < arr.length; ++i){
+        if (i !== mid){
+            let item = arr[i];
+            item < value_check ? left.push(item) : right.push(item);
         }
     }
-    return [...quickSort(left), pivot, ...quickSort(right)];
+    return [...quickSort(left),value_check,...quickSort(right)];
 };
 
-// merge sort
-function sort_merge(arr = []) {
-    if (arr.length < 2){
-        return arr;
-    }
-    let right = [...arr];
-    let mid = right.length / 2;
-    let left = right.splice(0, mid);
-    return merge(sort_merge(left), sort_merge(right));
-}
+const bubbleSort = (arr) => {
+    let n = arr.length;
+    let swapped;
 
-function merge(left, right) {
-    let arr_sort = [];
-
-    while (left.length && right.length) {
-        if (left[0] < right[0]) {
-            arr_sort.push(left.shift())
-        } else {
-            arr_sort.push(right.shift())
+    do {
+        swapped = false;
+        for (let i = 0; i < n - 1; i++) {
+            if (arr[i] > arr[i + 1]) {
+                [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
+                swapped = true;
+            }
         }
-    }
+        n--;
+    } while (swapped);
 
-    return [...arr_sort, ...left, ...right];
-}
+    return arr;
+};
+
+console.log(mergeSort([1, 5, 4, 2, 6, 3, 7, 9, 8, 10, 0]));
+console.log(quickSort([1, 5, 4, 2, 6, 3, 7, 9, 8, 10, 0]));
+console.log(bubbleSort([1, 5, 4, 2, 6, 3, 7, 9, 8, 10, 0]));
