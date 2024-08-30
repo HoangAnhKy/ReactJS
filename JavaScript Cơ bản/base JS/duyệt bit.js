@@ -3,12 +3,12 @@ function maximalMultiple(arr) {
     let maxProduct = -Infinity;
 
     // Duyệt qua tất cả các cách chia mảng thành 2 phần
-    for (let i = 1; i < (1 << n) - 1; i++) {
+    for (let i = 1; i < (1 << n) - 1; i++) { // (1 << n) là n ^ 2 
         let sum1 = [], sum2 = [];
         console.group(i)
         // Chia các phần tử vào 2 nhóm dựa trên bitmask
         for (let j = 0; j < n; j++) {
-            if (i & (1 << j)) {
+            if (i & (1 << j)) { // sẽ trả về một số khác 0 nếu bit thứ j của i là 1, ngược lại là 0.
                 sum1.push(arr[j]);
             } else {
                 sum2.push(arr[j]);
