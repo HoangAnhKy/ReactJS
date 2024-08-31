@@ -1,9 +1,15 @@
+/*
+Lý thuyết về Bitwise 
+AND (&) Thực hiện phép toán AND trên từng cặp bit tương ứng của hai số. Kết quả là 1 chỉ khi cả hai bit đều là 1.
+OR  (|) Thực hiện phép toán OR trên từng cặp bit tương ứng của hai số. Kết quả là 1 nếu ít nhất một trong hai bit là 1
+XOR (^) Thực hiện phép toán XOR trên từng cặp bit tương ứng của hai số. Kết quả là 1 nếu chỉ một trong hai bit là 1 (không phải cả hai).
+*/
 function maximalMultiple(arr) {
     let n = arr.length;
     let maxProduct = -Infinity;
 
     // Duyệt qua tất cả các cách chia mảng thành 2 phần
-    for (let i = 1; i < (1 << n) - 1; i++) { // (1 << n) là n ^ 2 
+    for (let i = 1; i < (1 << n) - 1; i++) { // (1 << n) là 2 ^ n
         let sum1 = [], sum2 = [];
         console.group(i)
         // Chia các phần tử vào 2 nhóm dựa trên bitmask
