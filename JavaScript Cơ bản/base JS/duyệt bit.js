@@ -64,3 +64,21 @@ function maximalMultiple(arr) {
 
     return maxProduct;
 }
+
+// cách 2 nhưng mà dễ hiểu hơn
+
+function maximalMultiple(arr) {
+    let sumArr = arr.reduce((acc, x) => acc + x, 0);
+    let ans = -Infinity;
+
+    function backTrack(arr, pos = 0, sum = 0) {
+        for (let i = pos + 1; i < arr.length; i++) {
+            let sumA = sum + arr[i];
+            ans = Math.max(ans, (sumArr - sumA) * sumA);
+            backTrack(arr, i, sumA);
+        }
+    }
+    
+    backTrack(arr);
+    return ans;
+}
