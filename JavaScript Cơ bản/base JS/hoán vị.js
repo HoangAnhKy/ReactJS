@@ -31,7 +31,7 @@ const getPermutation = function (n, k) {
         let index = Math.floor(k / fact); //  xác định nhóm mà hoán vị thứ k nằm trong, do mỗi nhóm có fact hoán vị
         ans.push(arr[index]);
         arr.splice(index, 1); // xóa nó đi;
-        k %= fact;
+        k %= fact; // xác định vị trí tiếp theo cần tìm trong nhóm hoán vị con
     }
 
     return ans;
