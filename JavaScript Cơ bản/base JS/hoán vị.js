@@ -39,3 +39,37 @@ const getPermutation = function (n, k) {
 
 // Ví dụ:
 console.log(getPermutation(3, 4)); // Output: "231"
+
+// đệ quy   
+
+function findKthPermutation(n, k) {
+    let result = [];
+    let used = Array(n).fill(false); // Mảng đánh dấu các phần tử đã được sử dụng
+    let count = 0;
+
+    function backtrack(path) {
+        if (path.length === n) {
+            count += 1;
+            if (count === k) {
+                result = [...path]; // Lưu kết quả khi tìm thấy hoán vị thứ k
+            }
+            return;
+        }
+
+        for (let i = 1; i <= n; i++) {
+            if (!used[i - 1]) { // Kiểm tra xem phần tử này đã được sử dụng chưa
+                used[i - 1] = true;
+                path.push(i);
+
+                backtrack(path);
+
+                if (result.length > 0) return; // Nếu đã tìm thấy hoán vị thứ k, kết thúc sớm
+                used[i - 1] = false;
+                path.pop(); // Quay lui để thử các hoán vị khác
+            }
+        }
+    }
+
+    backtrack([]);
+    return result;
+}
