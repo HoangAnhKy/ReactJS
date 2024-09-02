@@ -27,10 +27,10 @@ const getPermutation = function (n, k) {
 
     while (n !== 0) {
         n--;
-        let fact = factory(n);
-        let index = Math.floor(k / fact);
+        let fact = factory(n); //  Giá trị này cho biết số lượng hoán vị có thể tạo ra từ n phần tử còn lại.
+        let index = Math.floor(k / fact); //  xác định nhóm mà hoán vị thứ k nằm trong, do mỗi nhóm có fact hoán vị
         ans.push(arr[index]);
-        arr.splice(index, 1);
+        arr.splice(index, 1); // xóa nó đi;
         k %= fact;
     }
 
