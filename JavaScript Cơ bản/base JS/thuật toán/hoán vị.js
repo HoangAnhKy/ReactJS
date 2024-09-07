@@ -14,6 +14,15 @@ const permute = (arr) => {
     return result;
 };
 
+/* 
+Cho một tập hơn gồm n số tự nhiên từ 1 tới n (n>1). Mỗi cách sắp xếp n phần tử này theo một thứ tự nào đó được gọi là một hoán vị của n phần tử.
+Như vậy sẽ có n! hoán vị các bộ số mà mỗi bộ số chứa n số từ 1 tới n
+
+Ví dụ với n=2, sẽ có 2 hoán vị là {1,2} và {2, 1}
+
+Ví dụ với n=3, sẽ có 6 hoán vị là {1,2,3}, {1,3,2}, {2,1,3}, {2,3,1}, {3,1,2} và {3,2,1}
+*/
+
 
 // giải ra đáp án luôn
 const getPermutation = function (n, k) {
