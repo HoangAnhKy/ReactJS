@@ -106,59 +106,62 @@ const User = new Schema({
 
 module.exports = mongoose.model('User', User);
 ```
-## validate schema in controller
+
+## validate schema tại controller
+
 ```js
-  async changePassword(req: Request | any, res: Response) {
-    // ...
-    // validate
-    const errValid = await checkSchema({
-      password: {
-        isLength: {
-          options: { min: 8 },
-          errorMessage: messageError.UsersController.changePassword.E0001,
+    async changePassword(req: Request | any, res: Response) {
+        // ...
+        // validate
+        const errValid = await checkSchema({
+        password: {
+            isLength: {
+            options: { min: 8 },
+            errorMessage: messageError.UsersController.changePassword.E0001,
+            },
+            matches: {
+            options: regexSignUp.password.regex,
+            errorMessage: messageError.UsersController.changePassword.E0004,
+            },
         },
-        matches: {
-          options: regexSignUp.password.regex,
-          errorMessage: messageError.UsersController.changePassword.E0004,
+        newPassword: {
+            isLength: {
+            options: { min: 8 },
+            errorMessage: messageError.UsersController.changePassword.E0002,
+            },
+            matches: {
+            options: regexSignUp.password.regex,
+            errorMessage: messageError.UsersController.changePassword.E0004,
+            },
         },
-      },
-      newPassword: {
-        isLength: {
-          options: { min: 8 },
-          errorMessage: messageError.UsersController.changePassword.E0002,
+        confirmPassword: {
+            isLength: {
+            options: { min: 8 },
+            errorMessage: messageError.UsersController.changePassword.E0003,
+            },
+            matches: {
+            options: regexSignUp.password.regex,
+            errorMessage: messageError.UsersController.changePassword.E0004,
+            },
         },
-        matches: {
-          options: regexSignUp.password.regex,
-          errorMessage: messageError.UsersController.changePassword.E0004,
-        },
-      },
-      confirmPassword: {
-        isLength: {
-          options: { min: 8 },
-          errorMessage: messageError.UsersController.changePassword.E0003,
-        },
-        matches: {
-          options: regexSignUp.password.regex,
-          errorMessage: messageError.UsersController.changePassword.E0004,
-        },
-      },
-    }).run(req);
+        }).run(req);
 
-    const errorList: any = [];
+        const errorList: any = [];
 
-    errValid.forEach((err: any) => {
-      if (err.errors.length > 0) {
-        errorList.push(err.errors[0]);
-      }
-    });
+        errValid.forEach((err: any) => {
+        if (err.errors.length > 0) {
+            errorList.push(err.errors[0]);
+        }
+        });
 
-    if (errorList.length > 0) {
-      return responseWith(res, 400, {
-        code: "ER-0001",
-        message: errorList,
-        data: {},
-      });
+        // return error
+        if (errorList.length > 0) {
+        return responseWith(res, 400, {
+            code: "ER-0001",
+            message: errorList,
+            data: {},
+        });
+        }
+        // ...
     }
-    // ...
-  }
 ```
