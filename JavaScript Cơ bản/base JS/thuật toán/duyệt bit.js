@@ -147,3 +147,33 @@ function combinationSum(arr, k) {
 
     return result.size;  // Trả về số lượng tập con duy nhất
 }
+
+// cách 2
+function combinationSum(arr, k) {
+    let result = [];  // Lưu các tập con thỏa mãn
+    arr.sort((a, b) => a - b);  // Sắp xếp mảng để tránh lặp
+    findSubsets(arr, k, 0, [], result);  // Gọi hàm đệ quy tìm tập con
+    return result.length;
+}
+
+function findSubsets(arr, target, index, currentSubset, result) {
+    if (target === 0) {
+        result.push([...currentSubset]);  // Thêm tập con hiện tại vào kết quả
+        return;
+    }
+
+    for (let i = index; i < arr.length; i++) {
+        // Tránh các phần tử trùng lặp
+        if (i > index && arr[i] === arr[i - 1]) continue;
+
+        if (arr[i] > target) break;  // Không cần tiếp tục nếu phần tử lớn hơn target
+
+        // Thêm phần tử vào tập con hiện tại và tiếp tục tìm kiếm
+        currentSubset.push(arr[i]);
+        findSubsets(arr, target - arr[i], i + 1, currentSubset, result);  // Dịch chuyển đến phần tử tiếp theo
+        currentSubset.pop();  // Loại bỏ phần tử vừa thêm để tìm các tổ hợp khác
+    }
+}
+
+console.log(combinationSum([1, 1, 2, 4, 3], 4))
+console.log(combinationSum([2, 3, 4, 2], 5))
