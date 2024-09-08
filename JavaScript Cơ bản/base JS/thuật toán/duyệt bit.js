@@ -177,3 +177,23 @@ function findSubsets(arr, target, index, currentSubset, result) {
 
 console.log(combinationSum([1, 1, 2, 4, 3], 4))
 console.log(combinationSum([2, 3, 4, 2], 5))
+
+
+/* 
+    quy hoạch động
+*/
+function findSubsetsWithSumK(arr, k) {
+    let db = Array(k + 1).fill([]);
+
+    db[0] = [[]];
+    for (let i of arr) {
+        for (let j = k; j >= i; j--) {
+            if (db[j - i].length > 0) {
+                db[j] = [...db[j], ...(db[j - i].map(subset => [...subset, i]))];
+            }
+        }
+    }
+    return db
+}
+
+console.log(findSubsetsWithSumK([1, 2, 4, 5], 7));
