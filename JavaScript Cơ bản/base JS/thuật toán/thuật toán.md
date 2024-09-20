@@ -22,3 +22,14 @@ Cách hoạt động:
 3) Lặp lại quá trình này cho đến khi:
 Đạt được một giải pháp hoàn chỉnh (thỏa mãn tất cả các yêu cầu của bài toán).
 Hoặc không có bước nào khả thi từ trạng thái hiện tại (tức là phải quay lui về bước trước đó để thử một lựa chọn khác).
+
+# Quy hoạch động (Dynamic Programming - DP) 
+
+Quy hoạch động (Dynamic Programming - DP) là một kỹ thuật giải bài toán bằng cách chia nhỏ bài toán lớn thành các bài toán con nhỏ hơn, giải quyết từng bài toán con và lưu trữ kết quả của chúng để tránh tính toán lại.
+
+Cách tiếp cận:
+1) Chia nhỏ bài toán: Thay vì giải toàn bộ bài toán ngay từ đầu, ta chia bài toán lớn thành các bài toán con.
+
+2) Lưu trữ kết quả: Sau khi giải quyết một bài toán con, ta lưu kết quả của nó (thường trong một mảng hoặc bảng) để sử dụng lại sau, tránh tính toán lại lần nữa.
+
+3) Sử dụng lại kết quả: Khi cần tính một bài toán con đã được giải trước đó, chỉ cần truy cập kết quả đã lưu thay vì tính toán lại.
