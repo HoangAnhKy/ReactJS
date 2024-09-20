@@ -1,5 +1,19 @@
 var array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
+// hàm sort ()
+
+/*
+ví dụ sort theo 2 điều kiện
+db.sort((a, b) => {
+    if (b.length !== a.length) {
+        return b.length - a.length;  // Sắp xếp theo độ dài giảm dần
+    } else {
+        return b[b.length - 1] - a[a.length - 1];  // Nếu độ dài bằng nhau, sắp xếp theo phần tử cuối cùng
+    }
+});
+
+*/
+
 // ------------ ép kiểu về string
 
 // console.log(array.toString());
