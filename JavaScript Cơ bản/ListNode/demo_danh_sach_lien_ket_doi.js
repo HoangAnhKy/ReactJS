@@ -1,125 +1,160 @@
-function Node(val = 0, next = null, prev = null) {
+function Node (val){
     this.val = val;
-    this.next = next;
-    this.prev = prev;
+    this.next = null;
+    this.prev = null;
 }
 
-function ListNode() {
-    this.head = null;
-    this.tail = null;
-}
-ListNode.prototype.add = function (val, next) {
-    let new_node = new Node(val);
+class ListNode{
+    #head;
+    #tail;
 
-    if (!this.head) {
-        this.head = new_node;
-        this.tail = new_node;
-    } else {
-        this.tail.next = new_node;
-        new_node.prev = this.tail;
-        this.tail = new_node
-    }
-}
-ListNode.prototype.print = function () {
-    let arr_head = []
-    let arr_tail = []
-    let cur = this.head
-    while (cur){
-        arr_head.push(cur.val)
-        cur = cur.next
-    }
-
-    cur = this.tail
-    while (cur){
-        arr_tail.push(cur.val)
-        cur = cur.prev
-    }
-    console.log("head: " + arr_head.join(" "))
-    console.log("\n")
-    console.log("tail: " + arr_tail.join(" "))
-}
-ListNode.prototype.before = function (val) {
-    let new_node = new Node(val);
-
-    if (!this.tail){
-        this.head = new_node;
-        this.tail = new_node;
-    }else {
-        new_node.next = this.head;
-        this.head.prev = new_node;
-        this.head = new_node
-    }
-}
-ListNode.prototype.delete = function (val){
-    let cur = this.head;
-    if (!cur){
-        return
-    }
-    if (cur.val === val){
-        let point_delete = cur;
-        this.head = point_delete.next
-        point_delete.next.prev = cur.prev;
-    }
-    else {
-        while (cur.next && cur.next.val !== val){
-            cur = cur.next
-        }
-        let point_delete = cur.next;
-        cur.next = point_delete.next;
-        if (point_delete.next){
-            point_delete.next.prev = cur;
+    add(val){
+        let new_node = new Node(val);
+        if (!this.#tail){
+            this.#tail = new_node;
+            this.#head = new_node;
         }else{
-            this.tail = cur
+            this.#tail.next = new_node;
+            new_node.prev = this.#tail
+            this.#tail = new_node;
         }
-
     }
-}
 
-ListNode.prototype.insert = function (index, val){
-    let cur = this.head;
-    let new_node = new Node(val);
-    if (!cur ){
-        this.tail = new_node;
-        this.head = new_node;
-    }else if (index === 0) {
-        cur.prev = new_node;
-        new_node.next = this.head;
-        this.head = new_node;
-    }
-    else {
-        index -= 1;
-        while (index > 0 && cur){
-            cur = cur.next;
-            index--;
-        }
-        if (index > 0 || !cur){
-            console.log("Index vượt quá giới hạn của list");
-            return
-        }
-        let next = cur.next;
-        new_node.next = next;
-        new_node.prev = cur
+    before(val){
 
-        if (next){
-            next.prev = new_node
+        let new_node = new Node(val);
+        if (!this.#head){
+            this.#tail = new_node;
+            this.#head = new_node;
         }else{
-            this.tail = new_node
+            new_node.next = this.#head;
+            this.#head.prev = new_node;
+            this.#head = new_node;
+        }
+    }
+
+    insertBefore(index, val){
+
+        let new_node = new Node(val);
+        if (!this.#head){
+            this.#tail = new_node;
+            this.#head = new_node;
+        }
+        else if (index === 0){
+            new_node.next = this.#head;
+            this.#head.prev = new_node;
+            this.#head = new_node;
+        }
+        else{
+            let cur = this.#head;
+            while(index > 1 && cur){
+                index--;
+                cur = cur.next;
+            }
+            let next = cur.next;
+
+            cur.next = new_node;
+            new_node.next = next;
+
+            if(next){
+                next.prev = new_node;
+            }else{
+                this.#tail = new_node;
+            }
+            new_node.prev = cur;
+        }
+    }
+
+    insertAfter(index, val){
+        let new_node = new Node(val);
+
+        if(!this.#tail){
+            this.#head = new_node;
+            this.#tail = new_node;
+        }
+        else if(index === 0){
+            new_node.prev = this.#tail;
+            this.#tail.next = new_node
+            this.#tail = new_node;
+        }
+        else {
+            let cur = this.#tail
+            while(index > 1 && cur){
+                index--;
+                cur = cur.prev;
+            }
+            let temp = cur.prev;
+
+            cur.prev = new_node;
+            new_node.prev = temp;
+
+            if(temp){
+                new_node.next = temp.next
+                temp.next = new_node;
+            }else{
+                new_node.next = this.#head;
+                this.#head = new_node;
+            }
+        }
+    }
+
+
+    print(){
+        let head = [];
+        let tail = [];
+        let cur_head = this.#head;
+        let cur_tail = this.#tail;
+
+        while(cur_head){
+            head.push(cur_head.val);
+            cur_head = cur_head.next;
         }
 
-        cur.next = new_node;
+        while(cur_tail){
+            tail.push(cur_tail.val);
+            cur_tail = cur_tail.prev;
+        }
+
+        console.log("head: " + head.join(" "));
+        console.log("tail: " + tail.join(" "));
     }
+
+    addList(arr){
+        for(let i of arr){
+            this.add(i);
+        }
+    }
+
+    remove(val){
+        let cur = this.#head;
+        if (cur && cur.val === val){
+            this.#head = this.#head.next;
+            this.#head.prev = cur.prev;
+        }else if(cur){
+            while(cur.next && cur.next.val !== val){
+                cur = cur.next;
+            }
+            let node_delete = cur.next;
+
+            cur.next = node_delete.next;
+            if (node_delete.next){
+                cur.next.prev = node_delete.prev
+            }else{
+                this.#tail = cur
+            }
+        }
+    }
+
+
 }
 
-// khởi tạo list
-let list = new ListNode();
-let arr = [1,2,3];
-for (let i of arr){
-    list.before(i);
-}
 
-list.add(0)
-list.before(4)
-list.add(-1)
-list.delete(0)
-list.insert(0, 8);
+let list = new ListNode;
+list.addList([1,2,3]);
+list.add(5)
+list.before(0)
+list.insertBefore(0, -1);
+list.insertBefore(5, 4);
+list.insertAfter(0, 6);
+list.remove(-1);
 list.print();
