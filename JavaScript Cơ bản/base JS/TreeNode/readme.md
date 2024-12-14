@@ -198,3 +198,159 @@ class Tree{
     // ...
 }
 ```
+
+# Kỹ thuật xoay tree
+
+## Xoay phải
+
+Kỹ thuật này thường áp dụng cho những cây nhị phần tìm kiếm bị lệch về bên trái (độ cao của cây con trái lớn hơn độ của của cây con phải).
+
+![alt text](image-3.png)
+
+Với cách xoay này ta cần quan tâm tới node gốc (A) cây con bên trái (B) và cây con bên phải của cây con bên trái (D).
+
+Cách xoay:
+
+- Biến đổi node B thành node gốc, node gốc (A) thành cây con bên phải của B.
+
+    ![alt text](image-4.png)
+
+- Nếu như trên hình thi node B có tới 3 cây con, sai quy tắc của cây nhị phân, nên ta cần chuyển node D thành node con trái của A.
+
+    (lưu ý là 2 hoạt động trên diễn ra cùng lúc nên cần phải thêm một số node tạm).
+
+    ![alt text](image-5.png)
+
+- Demo code:
+
+    ```js
+    class Tree{
+        // ...
+        turnRight(node = this.root){
+            let turn = node.left;
+            let temp = turn.right;
+
+            node.left = temp;
+            turn.right = node;
+
+            return turn;
+        }
+        // ...
+    }
+    ```
+
+## Xoay trái.
+
+Kỹ thuật này thường áp dụng cho những cây nhị phần tìm kiếm bị lệch về bên phải(độ cao của cây con phải lớn hơn độ của của cây con trái).
+
+![alt text](image-6.png)
+
+Với cách xoay này ta hoàn toàn làm ngược lại cách xoay trái.
+
+Với cách xoay này ta cần quan tâm tới node gốc (A) cây con bên trái (B) và cây con bên phải của cây con bên trái (C).
+
+Cách xoay:
+
+- Gán node trái của B bằng A:
+
+    ![alt text](image-7.png)
+
+- Gán node con bên phải của A bằng C:
+
+    ![alt text](image-8.png)
+
+- Demo code: 
+
+    ```js
+    class Tree{
+    // ...
+    turnLeft(node = this.root){
+        let turn = node.right;
+        let temp = turn.left;
+
+        node.left = temp;
+        turn.right = node;
+
+        return turn;
+    }
+    
+    // ...
+    ```
+## Cách trường hợp xử lý cần bằng để thành cây AVL
+
+Có 4 trường hợp lệch trong cây nhị phân tìm kiếm:
+
+- `Lệch trái - trái:` là node cha có độ cao của cây con bên trái lớn hơn cây con bên phải, và đối với cây con bên trái thì độ cao của cây con trái cũng lớn hơn cây con phải.
+
+    Với những trường hợp lệch trái - trái, ta xử lý rất đơn giản, chỉ cần xoay phải cây là được.
+
+
+- `Lệch trái - phải:` là node cha có độ cao của cây con bên trái lớn hơn cây con bên phải, và đối với cây con bên trái thì độ cao của cây con phải lớn hơn cây con trái.
+
+    Với trường hợp lệnh trái - phải, ta phải thực hiện 2 phép xoay:
+
+    - Xoay trái trái ở cây con bên trái.
+    - Xoay phải cây.
+- `Lệch phải - phải:` chỉ cần xoay trái cây là được.
+- `Lệch phải  - trái:` ta phải thực hiện 2 phép xoay ngược lại với trái phải
+
+
+- Demo
+
+```js
+class AVLTree {
+    constructor() {
+        this.root = null;
+    }
+
+    countLevel(node = this.root) {
+        if (!node) return 0;
+        return 1 + Math.max(this.countLevel(node.left), this.countLevel(node.right));
+    }
+
+    turnRight(node) {
+        let b = node.left;
+        let d = b.right;
+        node.left = d;
+        b.right = node;
+        return b;
+    }
+
+    turnLeft(node) {
+        let b = node.right;
+        let d = b.left;
+        node.right = d;
+        b.left = node;
+        return b;
+    }
+
+    updateTreeAVL(node = this.root) {
+        if (!node) return null;
+
+        if (Math.abs(this.countLevel(node.left) - this.countLevel(node.right)) > 1) {
+            if (this.countLevel(node.left) > this.countLevel(node.right)) {
+                let cur = node.left;
+                if (this.countLevel(cur.left) >= this.countLevel(cur.right)) {
+                    node = this.turnRight(node);
+                } else {
+                    node.left = this.turnLeft(cur);
+                    node = this.turnRight(node);
+                }
+            } else {
+                let cur = node.right;
+                if (this.countLevel(cur.right) >= this.countLevel(cur.left)) {
+                    node = this.turnLeft(node);
+                } else {
+                    node.right = this.turnRight(cur);
+                    node = this.turnLeft(node);
+                }
+            }
+        }
+
+        if (node.left && node.left !== node) node.left = this.updateTreeAVL(node.left);
+        if (node.right && node.right !== node) node.right = this.updateTreeAVL(node.right);
+
+        return node;
+    }
+}
+```
