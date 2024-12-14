@@ -172,3 +172,29 @@ printTree(node = this.root, memo = []) {
     }
 
 ```
+
+# AVLTree
+
+`Cây AVL` (viết tắt của tên các nhà phát minh Adelson, Velski và Landis) là cây tìm kiếm nhị phân có độ cân bằng cao. Cây AVL kiểm tra độ cao (bậc) của các cây con bên trái và cây con bên phải và bảo đảm rằng hiệu số giữa chúng là không lớn hơn 1. Hiệu số này được gọi là `Balance Factor` (Nhân tố cân bằng).
+
+Hình ảnh ví dụ của cây AVL:
+
+![alt text](image-2.png)
+
+```js
+class Tree{
+    // ...
+    countLevel(node = this.root){
+        if (!node) return 0;
+        return 1 + Math.max(this.countLevel(node.left), this.countLevel(node.right));
+    }
+
+    checkAvl(node = this.root){
+        if (!node) return "true";
+        if (Math.abs(this.countLevel(node.left) - this.countLevel(node.right)) > 1) return "false";
+        return this.checkAvl(node.left) && this.checkAvl(node.right);
+    }
+
+    // ...
+}
+```
