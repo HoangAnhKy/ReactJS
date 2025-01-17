@@ -204,7 +204,7 @@ export default Context;
 -   `useLayoutEffect` gần giống như `useEffect` đến 99%, chỉ khác nhau một số chức năng. Tỉ lệ sử dụng `useLayoutEffect` là hy hữu, đa số sử dụng `useEffect` là nhiều.
 -   Sự khác nhau của `useLayoutEffect` và `useEffect` trong quá trình thực thi:
 
-| STT | useLayoutEffect                                | useEffect                                             |
+| STT |  useEffect                                     |              useLayoutEffect                          |
 | :-- | :--------------------------------------------- | :---------------------------------------------------- |
 | 1   | Cập nhật lại State                             | Cập nhật lại State                                    |
 | 2   | Cập nhật lại DOM                               | Cập nhật lại DOM                                      |
