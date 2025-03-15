@@ -30,3 +30,14 @@ setTimeout(() => {
   targetNode.appendChild(newElement);
 }, 2000);
 ```
+
+# các tham số trong config
+
+```js
+observer.observe(targetNode, {
+  childList: true, // Theo dõi thêm/xóa phần tử con
+  attributes: true, // Theo dõi thay đổi thuộc tính (e.g., class, id)
+  subtree: true, // Theo dõi toàn bộ phần tử con bên trong
+  characterData: true, // Theo dõi thay đổi nội dung văn bản
+});
+```
