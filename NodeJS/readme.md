@@ -2,6 +2,12 @@ Tool quản lý [nvm](https://github.com/coreybutler/nvm-windows/releases);
 
 # Lệnh cơ bản
 
+- Đổi thư mục root
+
+  ```sh
+  nvm root C:\laragon\bin\nodejs
+  ```
+
 - Xem danh sách các phiên bản đã cài
 
   ```sh
