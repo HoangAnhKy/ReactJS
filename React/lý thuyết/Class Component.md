@@ -98,7 +98,7 @@ componentWillUnmount() {
 */
 ```
 
-# Redux trong js
+# Redux trong reactJS
 
 ### cài redux
 
