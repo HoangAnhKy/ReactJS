@@ -97,3 +97,101 @@ componentWillUnmount() {
 }
 */
 ```
+
+# Redux trong js
+
+### cài redux
+
+```sh
+npm install react-redux redux
+```
+
+### khởi tạo reducer xử  lý
+
+```js
+export const INCREASE_COUNT = "INCREASE_COUNT";
+
+export const increaseCount = () => ({
+    type: INCREASE_COUNT,
+});
+// khi code dự án tách phần này ra làm reducer.js
+const initialState = { count: 0 };
+
+export default function globalReducer(state = initialState, action) {
+    switch (action.type) {
+        case INCREASE_COUNT:
+            return { ...state, count: state.count + 1 };
+        default:
+            return state;
+    }
+}
+```
+
+### khởi tạo store 
+
+```js
+import { createStore } from "redux";
+import globalReducer from "./Hook/actions.js";
+
+const store = createStore(globalReducer);
+
+export default store;
+```
+
+### thêm store vào phạm vi global
+
+```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+import { Provider } from "react-redux";
+import store from "./store";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+    <React.StrictMode>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </React.StrictMode>,
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+```
+
+# thêm vào code
+```js
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { increaseCount } from "./actions";
+
+class Example extends Component {
+    render() {
+        const { count, increase } = this.props;
+
+        return (
+            <>
+                <h1>{count}</h1>
+                <button onClick={increase}>Click</button>
+            </>
+        );
+    }
+}
+
+// Xử  dụng redux
+const mapStateToProps = (state) => ({
+    count: state.count,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    increase: () => dispatch(increaseCount()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Example);
+```
