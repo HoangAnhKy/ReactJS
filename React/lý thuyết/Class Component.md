@@ -98,6 +98,104 @@ componentWillUnmount() {
 */
 ```
 
+## shouldComponentUpdate (khá giống useCallback)
+cho phép component tự quyết định có render lại hay không khi props hoặc state sắp thay đổi.
+
+chỉ chạy trong pha UPDATE, không bao giờ chạy khi mount hay unmount.
+
+1. Luồng update đầy đủ:
+2. props/state sắp đổi
+3. shouldComponentUpdate(nextProps, nextState)
+4. `nếu true` → render(),  `nếu false` → bỏ qua render + bỏ luôn componentDidUpdate
+    ```js
+    shouldComponentUpdate(nextProps) {
+        return nextProps.value !== this.props.value;
+    }
+    ```
+
+Ý nghĩa:
+- chỉ render khi có thứ thật sự thay đổi
+- tránh render thừa
+
+ví dụ
+```js
+import React from "react";
+
+class Counter extends React.Component {
+    state = { count: 0 };
+
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log(
+            "SCU:",
+            "current =",
+            this.state.count,
+            "next =",
+            nextState.count,
+        );
+        return nextState.count !== this.state.count;
+    }
+
+    increaseSame = () => {
+        // setState nhưng KHÔNG đổi giá trị
+        this.setState({ count: this.state.count });
+    };
+
+    increase = () => {
+        // setState làm thay đổi giá trị
+        this.setState({ count: this.state.count + 1 });
+    };
+
+    render() {
+        console.log("render");
+        return (
+            <div>
+                <h2>{this.state.count}</h2>
+                <button onClick={this.increase}>+1</button>
+                <button onClick={this.increaseSame}>set same</button>
+            </div>
+        );
+    }
+}
+
+export default Counter;
+```
+
+# PureComponent
+Nó là một class component cài sẵn shouldComponentUpdate với logic shallow compare cho toàn bộ props và state.Chỉ vẽ lại khi có gì đó thực sự thay đổi
+
+`PureComponent` = `Component` + `shouldComponentUpdate` (shallow compare). 
+
+```js
+import React from "react";
+
+class Parent extends React.Component {
+    state = { count: 0 };
+
+    render() {
+        return (
+            <>
+                <button
+                    onClick={() =>
+                        this.setState({ count: this.state.count + 1 })
+                    }
+                >
+                    set same
+                </button>
+                <Child value={this.state.count} />
+            </>
+        );
+    }
+}
+
+class Child extends React.PureComponent {
+    render() {
+        console.log("Child render");
+        return <div>{this.props.value}</div>;
+    }
+}
+
+export default Parent;
+```
 # Redux trong reactJS
 
 ### cài redux
