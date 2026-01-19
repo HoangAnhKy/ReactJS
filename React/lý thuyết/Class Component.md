@@ -1,3 +1,20 @@
+- [Class component](#class-component)
+  - [render](#render)
+- [khai báo props bắt buộc](#khai-báo-props-bắt-buộc)
+- [Hàm cơ bản](#hàm-cơ-bản)
+  - [useState](#usestate)
+  - [useEffect](#useeffect)
+  - [shouldComponentUpdate (khá giống useCallback)](#shouldcomponentupdate-khá-giống-usecallback)
+  - [useRef](#useref)
+- [PureComponent](#purecomponent)
+- [Redux trong reactJS](#redux-trong-reactjs)
+    - [cài redux](#cài-redux)
+    - [khởi tạo reducer xử  lý](#khởi-tạo-reducer-xử--lý)
+    - [khởi tạo store](#khởi-tạo-store)
+    - [thêm store vào phạm vi global](#thêm-store-vào-phạm-vi-global)
+    - [thêm vào code](#thêm-vào-code)
+  
+****
 # Class component
 
 ## render
@@ -159,6 +176,68 @@ class Counter extends React.Component {
 
 export default Counter;
 ```
+## useRef
+
+cách dùng 
+
+```js
+const myRef = React.createRef();
+// output
+{
+current: null
+}
+```
+ví dụ
+- mount ref vào dom
+
+    ```js
+    import React from "react";
+
+    class InputFocus extends React.Component {
+    inputRef = React.createRef();
+
+    componentDidMount() {
+        // DOM đã tồn tại this.inputRef.current = HTMLInputElement
+        this.inputRef.current.focus();
+    }
+
+    render() {
+        return (
+        <input
+            ref={this.inputRef}
+            placeholder="Type here"
+        />
+        );
+    }
+    }
+
+    export default InputFocus;
+    ```
+- mount vào component
+
+    ```js
+    class Child extends React.Component {
+        sayHello() {
+            console.log("Hello from Child");
+        }
+
+        render() {
+            return <div>Child</div>;
+        }
+    }
+
+    class Parent extends React.Component {
+        childRef = React.createRef();
+
+        componentDidMount() {
+            this.childRef.current.sayHello();
+        }
+
+        render() {
+            return <Child ref={this.childRef} />;
+        }
+    }
+    ```
 
 # PureComponent
 Nó là một class component cài sẵn shouldComponentUpdate với logic shallow compare cho toàn bộ props và state.Chỉ vẽ lại khi có gì đó thực sự thay đổi
@@ -263,7 +342,7 @@ root.render(
 reportWebVitals();
 ```
 
-# thêm vào code
+### thêm vào code
 ```js
 import React, { Component } from "react";
 import { connect } from "react-redux";
