@@ -142,3 +142,196 @@ export function App() {
 
 export default App;
 ```
+
+## Muốn viết hàm xử lý sẵn như callAPI trong redux thì làm như sau:
+
+### cách dùng
+xử  dụng `createAsyncThunk` là một hàm của Redux Toolkit dùng để xử lý các tác vụ bất đồng bộ (API, upload file, login, lấy dữ liệu từ server...) trong Redux một cách đơn giản hơn
+
+```js
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+export const fetchCourses = createAsyncThunk(
+    'course/fetchCourses',
+    async () => {
+        const response = await axios.get(
+            'http://127.0.0.1:8000/api/course'
+        );
+        return response.data;
+    }
+);
+```
+### Vòng đời
+Vòng đời của `createAsyncThunk`, khi dùng `dispatch(fetchCourses());`
+
+Redux Toolkit tự động tạo 3 action:
+```js
+// pending: khi bắt đầu request
+course/fetchCourses/pending
+// fulfilled: khi request thành công
+course/fetchCourses/fulfilled
+// rejected: khi request thất bại
+course/fetchCourses/rejected
+```
+
+### addCase() dùng để đăng ký reducer cho một action cụ thể.
+
+Trong trường hợp createAsyncThunk, Redux Toolkit tự sinh ra các action nên phải dùng extraReducers + addCase để lắng nghe chúng.
+
+```js
+extraReducers: (builder) => {
+    builder
+        // bắt đầu chạy
+        .addCase(fetchCourses.pending, (state) => {
+            state.loading = true;
+        })
+        // chạy thành công sẽ xử lý gì
+        .addCase(fetchCourses.fulfilled, (state, action) => {
+            state.loading = false;
+            state.courses = action.payload;
+        })
+        // chạy thất bại sẽ xử lý gì
+        .addCase(fetchCourses.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        });
+}
+```
+
+hiểu đơn giản là nó giống ajax
+
+```js
+$.ajax({
+    url: '/courses',
+
+    beforeSend() {
+        // pending
+    },
+
+    success(data) {
+        // fulfilled
+    },
+
+    error(err) {
+        // rejected
+    }
+});
+```
+
+# tips
+
+nên viết addCases thành 1 helper function để  có thể tái xử dụng nhiều lần
+
+```js
+const addCases = (builder, thunk, onSuccess) => {
+  builder
+      .addCase(thunk.pending, (state) => { 
+          state.loading = true; 
+      })
+      .addCase(thunk.fulfilled, (state, action) => {
+          state.loading = false;
+          onSuccess(state, action);
+      })
+      .addCase(thunk.rejected, (state, action) => {
+          state.loading = false;
+          state.error = action.error.message;
+      });
+};
+```
+
+khi dùng
+
+```js
+//...
+extraReducers: (builder) => {
+    addCases(builder, fetchCourses, (state, action) => {
+        state.courses = action.payload;
+    });
+    addCases(builder, createCourse, (state, action) => {
+        state.courses.push(action.payload);
+    });
+    addCases(builder, deleteCourse, (state, action) => {
+        state.courses = state.courses.filter(c => c.id !== action.payload);
+    });
+    addCases(builder, updateCourse, (state, action) => {
+        const index = state.courses.findIndex(c => c.id === action.payload.id);
+        state.courses[index] = action.payload;
+    });
+}
+```
+
+ví dụ
+
+```js
+
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+const local = "http://127.0.0.1:8000/"
+
+// ✅ Khai báo tất cả async thunk ở đây
+export const fetchCourses = createAsyncThunk('course/fetchCourses', async () => {
+    const response = await axios.get(local + "course");
+    return response.data;
+});
+
+export const createCourse = createAsyncThunk('course/createCourse', async (data) => {
+    const response = await axios.post(local + "course/create", data);
+    return response.data;
+});
+
+export const deleteCourse = createAsyncThunk('course/deleteCourse', async (id) => {
+    await axios.delete(local + `course/${id}`);
+    return id;
+});
+
+export const updateCourse = createAsyncThunk('course/updateCourse', async ({ id, data }) => {
+    const response = await axios.put(local + `course/${id}`, data);
+    return response.data;
+});
+
+// ==============================
+
+const addCases = (builder, thunk, onSuccess) => {
+    builder
+        .addCase(thunk.pending, (state) => { state.loading = true; })
+        .addCase(thunk.fulfilled, (state, action) => {
+            state.loading = false;
+            onSuccess(state, action); // ✅ xử lý riêng cho từng action
+        })
+        .addCase(thunk.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        });
+};
+
+// ==============================
+
+export const course = createSlice({
+    name: 'course',
+    initialState: {
+        courses: [],
+        loading: false,
+        error: null,
+    },
+    reducers: {},
+    extraReducers: (builder) => {
+        addCases(builder, fetchCourses, (state, action) => {
+            state.courses = action.payload;
+        });
+        addCases(builder, createCourse, (state, action) => {
+            state.courses.push(action.payload);
+        });
+        addCases(builder, deleteCourse, (state, action) => {
+            state.courses = state.courses.filter(c => c.id !== action.payload);
+        });
+        addCases(builder, updateCourse, (state, action) => {
+            const index = state.courses.findIndex(c => c.id === action.payload.id);
+            state.courses[index] = action.payload;
+        });
+    },
+});
+
+export default course.reducer;
+```
